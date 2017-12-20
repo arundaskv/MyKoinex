@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="attinad.mykoinex.HomeActivity"
+    tools:context="wallet.mycoin.HomeActivity"
     tools:showIn="@layout/activity_main">
 
     <RelativeLayout
@@ -189,9 +189,9 @@
                     android:layout_width="120dp"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold"
-                    android:textSize="44sp"
+                    android:textSize="32sp"
                     android:layout_height="match_parent"
-                    android:text="00.00"
+                    android:text="-000.00"
                     android:gravity="center_vertical|right"/>
                 <TextView
                     android:layout_centerVertical="true"
