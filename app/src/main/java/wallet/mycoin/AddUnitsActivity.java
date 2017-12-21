@@ -42,11 +42,11 @@ public class AddUnitsActivity extends AppCompatActivity {
     private void displayValuesFromMemory() {
         UnitDepo unitDepo = KoinexMemory.getCoinUnitData(this);
         if (unitDepo != null) {
-            bitcoin.setText(getStringFromDouble(unitDepo.getBitcoinUnit()));
-            litecoin.setText(getStringFromDouble(unitDepo.getLitecoinUnit()));
-            ripple.setText(getStringFromDouble(unitDepo.getRippleUnit()));
-            ethreum.setText(getStringFromDouble(unitDepo.getEthereumUnit()));
-            bitcoincash.setText(getStringFromDouble(unitDepo.getBitcoincashUnit()));
+            bitcoin.setText(getStringFromDouble4Point(unitDepo.getBitcoinUnit()));
+            litecoin.setText(getStringFromDouble4Point(unitDepo.getLitecoinUnit()));
+            ripple.setText(getStringFromDouble4Point(unitDepo.getRippleUnit()));
+            ethreum.setText(getStringFromDouble4Point(unitDepo.getEthereumUnit()));
+            bitcoincash.setText(getStringFromDouble4Point(unitDepo.getBitcoincashUnit()));
 
             bitcoinDeposit.setText(getStringFromDouble(unitDepo.getBitcoinDeposit()));
             litecoinDeposit.setText(getStringFromDouble(unitDepo.getLitecoinDeposit()));
@@ -83,7 +83,16 @@ public class AddUnitsActivity extends AppCompatActivity {
         }
         return stringValue;
     }
+    private String getStringFromDouble4Point(double value) {
+        String stringValue="0";
+        try{
+            stringValue = String.format("%.4f", value);
+        }
+        catch (Exception e){
 
+        }
+        return stringValue;
+    }
     private void initView() {
         bitcoin = findViewById(R.id.bitcoinEtx);
         litecoin = findViewById(R.id.litecoinEtx);

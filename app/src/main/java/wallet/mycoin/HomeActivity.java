@@ -193,7 +193,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(KoinexMemory.getUserUniqueId(HomeActivity.this)!=null){
-                    Intent intent = new Intent(HomeActivity.this,AddUnitsActivity.class);
+                    Intent intent = new Intent(HomeActivity.this,AddTransactionActivity.class);
                     startActivity(intent);
                 }else {
                     signIn();
