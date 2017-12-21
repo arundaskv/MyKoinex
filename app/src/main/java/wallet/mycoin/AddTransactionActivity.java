@@ -64,14 +64,20 @@ public class AddTransactionActivity extends AppCompatActivity {
         dateImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+                final Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
                 DatePickerDialog dialog = new DatePickerDialog(AddTransactionActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                        debugToast(""+dayOfMonth+"-"+monthOfYear+"-"+year);
                         int month = monthOfYear+1;
-                        dateTxt.setText(""+dayOfMonth+"-"+month+"-"+year);
+                        if(  year <= calendar.get(Calendar.YEAR)
+                                && monthOfYear <= calendar.get(Calendar.MONTH)
+                                && dayOfMonth <= calendar.get(Calendar.DAY_OF_MONTH)){
+                            dateTxt.setText(""+dayOfMonth+"-"+month+"-"+year);
+
+                        }else{
+                            debugToast("Invalid Date");
+                        }
                     }
                 },
                calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
