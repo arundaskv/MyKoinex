@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 
+import wallet.mycoin.HomeActivity;
 import wallet.mycoin.model.MyTicker;
 import wallet.mycoin.model.UnitDepo;
 
@@ -56,5 +57,18 @@ public class KoinexMemory {
         }catch (Exception e){
             return null;
         }
+    }
+
+    public static String getUserUniqueId(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("mykoinex_memory",0);
+        String userid = sharedPreferences.getString("unique_id",null);
+        return userid;
+    }
+
+    public static void saveUserUniqueId(Context context, String userid){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("mykoinex_memory",0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("unique_id",userid);
+        editor.commit();
     }
 }

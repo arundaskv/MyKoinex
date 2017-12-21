@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "155840665607",
+    "firebase_url": "https://mykoinex-189608.firebaseio.com",
+    "project_id": "mykoinex-189608",
+    "storage_bucket": "mykoinex-189608.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155840665607:android:4517121c1d545e6a",
+        "android_client_info": {
+          "package_name": "wallet.mycoin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "155840665607-652gjb7r6455j3ncc2o6ni1ota2s1u4g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "wallet.mycoin",
+            "certificate_hash": "9a61e90ebb2ff791b2ab25170c283b9e41174ff7"
+          }
+        },
+        {
+          "client_id": "155840665607-hldm95055p0gjbltja6agv2b33colpmi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEYUB64K3ReEvrpi_WOFKILY2Qv3bVdEE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "155840665607-hldm95055p0gjbltja6agv2b33colpmi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
