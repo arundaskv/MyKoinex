@@ -10,4 +10,5 @@
         <item>ETH</item>
         <item>BCH</item>
     </string-array>
+    <string name="title_activity_transaction_history">TransactionHistoryActivity</string>
 </resources>

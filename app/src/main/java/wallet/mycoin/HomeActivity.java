@@ -163,7 +163,6 @@ public class HomeActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             String userId = mAuth.getCurrentUser().getEmail().split("@")[0];
-            debugToast(userId);
             KoinexMemory.saveUserUniqueId(this,userId);
         } else {
 
@@ -194,7 +193,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(KoinexMemory.getUserUniqueId(HomeActivity.this)!=null){
-                    Intent intent = new Intent(HomeActivity.this,AddTransactionActivity.class);
+                    Intent intent = new Intent(HomeActivity.this,TransactionHistoryActivity.class);
                     startActivity(intent);
                 }else {
                     signIn();
