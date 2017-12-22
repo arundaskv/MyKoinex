@@ -162,8 +162,9 @@ public class HomeActivity extends AppCompatActivity {
     }
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            debugToast(mAuth.getCurrentUser().getEmail());
-            KoinexMemory.saveUserUniqueId(this,mAuth.getCurrentUser().getEmail());
+            String userId = mAuth.getCurrentUser().getEmail().split("@")[0];
+            debugToast(userId);
+            KoinexMemory.saveUserUniqueId(this,userId);
         } else {
 
         }

@@ -47,6 +47,7 @@
                 android:text=":"/>
 
             <Spinner
+                android:id="@+id/coinSpinner"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -66,27 +67,28 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center|left"
-                android:layout_weight="0.4"
+                android:layout_weight="0.8"
                 android:text="Date"/>
-            <ImageButton
-                android:id="@+id/dateImg"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.4"
-                android:src="@color/colorPrimary"/>
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_weight="0.2"
                 android:text=":"/>
-
+            <ImageButton
+                android:id="@+id/dateImg"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4"
+                android:background="#00000000"
+                android:src="@drawable/ic_date_range"/>
             <TextView
                 android:id="@+id/dateTxtView"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center|left"
-                android:layout_weight="2"
+                android:layout_weight="1.6"
                 android:text=""/>
         </LinearLayout>
         <LinearLayout

@@ -150,7 +150,7 @@ public class AddUnitsActivity extends AppCompatActivity {
         })
          .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id)  {
-                        saveAllData();
+
                     }
          });
           alertDialogBuilder.create().show();
