@@ -61,13 +61,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         holder.priceTxt.setText(transaction.getPrice());
         holder.feesTxt.setText(transaction.getFees());
         holder.totalTxt.setText(transaction.getTotal());
-
     }
 
     @Override
     public int getItemCount() {
-
-            return transactions.size();
-
+        return transactions.size();
     }
 }
