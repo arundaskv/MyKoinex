@@ -71,6 +71,9 @@ public class TransactionHistoryActivity extends AppCompatActivity {
                 }
                 adapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
+                if(transactionList.size()==0){
+                    debugToast("No Transaction available");
+                }
             }
 
             @Override

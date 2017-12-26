@@ -33,46 +33,48 @@
             <TextView
                 android:id="@+id/dateText"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_height="@dimen/card_label_height"
+                android:textSize="@dimen/card_label_font"
                 android:layout_alignParentTop="true"
                 android:gravity="center_vertical"
-                android:text="29-12-2017"
+                android:text=""
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/coin_type"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:textColor="@color/colorPrimary"
+                android:layout_height="@dimen/card_label_height"
                 android:textSize="@dimen/card_label_font"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/dateText"
                 android:layout_toRightOf="@+id/dateText"
                 android:gravity="center_vertical"
-                android:text="Bitcoin" />
+                android:text="" />
             <TextView
                 android:id="@+id/tr_type"
                 android:layout_width="75dp"
-                android:layout_height="30dp"
+                android:layout_height="@dimen/card_label_height"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/card_label_font"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/coin_type"
                 android:layout_toEndOf="@+id/coin_type"
-                android:textColor="#2db300"
-                android:text="BUY"/>
+                android:textColor="@color/colorPrimary"
+                android:text=""/>
             <TextView
                 android:id="@+id/volumeLbl"
-                android:layout_width="75dp"
-                android:layout_height="30dp"
+                android:layout_width="65dp"
+                android:layout_height="@dimen/card_label_height"
+                android:textSize="@dimen/card_label_font"
                 android:gravity="center_vertical"
                 android:layout_below="@+id/dateText"
                 android:text="Volume :"/>
             <TextView
                 android:id="@+id/volumeTxt"
-                android:layout_width="75dp"
-                android:layout_height="30dp"
+                android:layout_width="90dp"
+                android:layout_height="@dimen/card_label_height"
                 android:gravity="center_vertical"
                 android:layout_toRightOf="@+id/volumeLbl"
                 android:layout_toEndOf="@+id/volumeLbl"
@@ -80,11 +82,12 @@
                 android:textSize="@dimen/card_label_font"
                 android:textColor="@color/colorPrimary"
                 android:layout_below="@+id/dateText"
-                android:text="0.0001"/>
+                android:text=""/>
             <TextView
                 android:id="@+id/priceUnitLbl"
                 android:layout_width="75dp"
-                android:layout_height="30dp"
+                android:layout_height="@dimen/card_label_height"
+                android:textSize="@dimen/card_label_font"
                 android:gravity="center_vertical"
                 android:layout_below="@+id/coin_type"
                 android:layout_toRightOf="@+id/volumeTxt"
@@ -93,7 +96,7 @@
             <TextView
                 android:id="@+id/unitPriceTxt"
                 android:layout_width="120dp"
-                android:layout_height="30dp"
+                android:layout_height="@dimen/card_label_height"
                 android:gravity="center_vertical"
                 android:layout_toRightOf="@+id/priceUnitLbl"
                 android:layout_toEndOf="@+id/priceUnitLbl"
@@ -101,19 +104,20 @@
                 android:textSize="@dimen/card_label_font"
                 android:textColor="@color/colorPrimary"
                 android:layout_below="@+id/coin_type"
-                android:text="1235000"/>
+                android:text=""/>
 
             <TextView
                 android:id="@+id/feesLbl"
-                android:layout_width="75dp"
-                android:layout_height="30dp"
+                android:layout_width="65dp"
+                android:layout_height="@dimen/card_label_height"
+                android:textSize="@dimen/card_label_font"
                 android:gravity="center_vertical"
                 android:layout_below="@+id/volumeLbl"
                 android:text="Fees :"/>
             <TextView
                 android:id="@+id/feesTxt"
-                android:layout_width="75dp"
-                android:layout_height="30dp"
+                android:layout_width="90dp"
+                android:layout_height="@dimen/card_label_height"
                 android:gravity="center_vertical"
                 android:layout_toRightOf="@+id/feesLbl"
                 android:layout_toEndOf="@+id/feesLbl"
@@ -121,12 +125,13 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/card_label_font"
                 android:textColor="@color/colorPrimary"
-                android:text="1000"/>
+                android:text=""/>
 
             <TextView
                 android:id="@+id/priceLbl"
                 android:layout_width="75dp"
-                android:layout_height="30dp"
+                android:layout_height="@dimen/card_label_height"
+                android:textSize="@dimen/card_label_font"
                 android:gravity="center_vertical"
                 android:layout_below="@+id/volumeLbl"
                 android:layout_toRightOf="@+id/feesTxt"
@@ -135,7 +140,7 @@
             <TextView
                 android:id="@+id/priceTxt"
                 android:layout_width="120dp"
-                android:layout_height="30dp"
+                android:layout_height="@dimen/card_label_height"
                 android:gravity="center_vertical"
                 android:layout_toRightOf="@+id/priceLbl"
                 android:layout_toEndOf="@+id/priceLbl"
@@ -143,20 +148,21 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/card_label_font"
                 android:textColor="@color/colorPrimary"
-                android:text="1234567"/>
+                android:text=""/>
 
 
             <TextView
                 android:id="@+id/totalLbl"
                 android:layout_width="75dp"
-                android:layout_height="30dp"
+                android:layout_height="@dimen/card_label_height"
+                android:textSize="@dimen/card_label_font"
                 android:gravity="center_vertical"
                 android:layout_below="@+id/priceLbl"
                 android:text="Total :"/>
             <TextView
                 android:id="@+id/totalTxt"
                 android:layout_width="125dp"
-                android:layout_height="30dp"
+                android:layout_height="@dimen/card_label_height"
                 android:gravity="center_vertical"
                 android:layout_toRightOf="@+id/totalLbl"
                 android:layout_toEndOf="@+id/totalLbl"
@@ -164,7 +170,7 @@
                 android:textSize="@dimen/card_label_font"
                 android:textColor="@color/colorAccent"
                 android:layout_below="@+id/priceLbl"
-                android:text="278961"/>
+                android:text=""/>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 

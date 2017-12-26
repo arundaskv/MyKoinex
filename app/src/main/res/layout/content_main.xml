@@ -40,6 +40,7 @@
                     <TextView
                         android:layout_weight="0.8"
                         android:layout_width="0dp"
+                        android:textSize="@dimen/home_general_textsize"
                         android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
                         android:text="Bitcoin "/>
@@ -52,6 +53,7 @@
                     <TextView
                         android:id="@+id/bitcoinValue"
                         android:layout_weight="1"
+                        android:textSize="@dimen/home_general_textsize"
                         android:textColor="@color/colorPrimary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -67,6 +69,7 @@
                     <TextView
                         android:layout_weight="0.8"
                         android:layout_width="0dp"
+                        android:textSize="@dimen/home_general_textsize"
                         android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
                         android:text="Litecoin "/>
@@ -80,6 +83,7 @@
                         android:id="@+id/liteValue"
                         android:layout_weight="1"
                         android:layout_width="0dp"
+                        android:textSize="@dimen/home_general_textsize"
                         android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
                         android:text="0"/>
@@ -94,6 +98,7 @@
                     <TextView
                         android:layout_weight="0.8"
                         android:layout_width="0dp"
+                        android:textSize="@dimen/home_general_textsize"
                         android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
                         android:text="Ripple "/>
@@ -107,6 +112,7 @@
                         android:id="@+id/rippleValue"
                         android:layout_weight="1"
                         android:layout_width="0dp"
+                        android:textSize="@dimen/home_general_textsize"
                         android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
                         android:text="0"/>
@@ -121,6 +127,7 @@
                     <TextView
                         android:layout_weight="0.8"
                         android:layout_width="0dp"
+                        android:textSize="@dimen/home_general_textsize"
                         android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
                         android:text="Ethereum "/>
@@ -135,6 +142,7 @@
                         android:id="@+id/etherValue"
                         android:layout_weight="1"
                         android:layout_width="0dp"
+                        android:textSize="@dimen/home_general_textsize"
                         android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
                         android:text="0"/>
@@ -149,6 +157,7 @@
                     <TextView
                         android:layout_weight="0.8"
                         android:layout_width="0dp"
+                        android:textSize="@dimen/home_general_textsize"
                         android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
                         android:text="Bitcoin Cash "/>
@@ -163,6 +172,7 @@
                         android:id="@+id/bitcoinCashValue"
                         android:layout_weight="1"
                         android:layout_width="0dp"
+                        android:textSize="@dimen/home_general_textsize"
                         android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
                         android:text="0"/>
@@ -228,7 +238,7 @@
             android:id="@+id/balanceLabel"
             android:layout_below="@id/tickerLayout"
             android:layout_width="match_parent"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:textStyle="bold"
             android:textSize="@dimen/balance_label_font"
             android:textColor="@color/colorPrimary"
@@ -250,6 +260,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.6"
+                android:textSize="@dimen/home_general_textsize"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:text="Coin"/>
@@ -257,6 +268,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textStyle="bold"
+                android:textSize="@dimen/home_general_textsize"
                 android:layout_weight="1"
                 android:textColor="@color/colorPrimary"
                 android:text="Units"/>
@@ -264,6 +276,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textStyle="bold"
+                android:textSize="@dimen/home_general_textsize"
                 android:layout_weight="1.2"
                 android:textColor="@color/colorPrimary"
                 android:text="Balance"/>
@@ -271,6 +284,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textStyle="bold"
+                android:textSize="@dimen/home_general_textsize"
                 android:layout_weight="1.2"
                 android:textColor="@color/colorPrimary"
                 android:text="Deposit"/>
@@ -278,6 +292,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textStyle="bold"
+                android:textSize="@dimen/home_general_textsize"
                 android:layout_weight="1"
                 android:textColor="@color/colorPrimary"
                 android:text="Profit"/>
@@ -297,6 +312,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:layout_weight="0.6"
                 android:textStyle="bold"
@@ -305,6 +321,7 @@
                 android:id="@+id/bitcoinUnit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1"
@@ -313,6 +330,7 @@
                 android:id="@+id/bitcoinBalance"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1.2"
@@ -321,6 +339,7 @@
                 android:id="@+id/bitcoinDeposit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1.2"
@@ -329,6 +348,7 @@
                 android:id="@+id/bitcoinProfit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1"
@@ -350,6 +370,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.6"
+                android:textSize="@dimen/home_general_textsize"
                 android:textStyle="bold"
                 android:gravity="center_vertical|left"
                 android:text="LTC"/>
@@ -357,6 +378,7 @@
                 android:id="@+id/litcoinUnit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1"
@@ -365,6 +387,7 @@
                 android:id="@+id/litcoinBalance"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1.2"
@@ -373,6 +396,7 @@
                 android:id="@+id/litcoinDeposit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1.2"
@@ -381,6 +405,7 @@
                 android:id="@+id/litecoinProfit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1"
@@ -403,6 +428,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.6"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:text="XRP"/>
@@ -410,6 +436,7 @@
                 android:id="@+id/rippleUnit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1"
@@ -418,6 +445,7 @@
                 android:id="@+id/rippleBalance"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1.2"
@@ -426,6 +454,7 @@
                 android:id="@+id/rippleDeposit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1.2"
@@ -435,6 +464,7 @@
                 android:id="@+id/rippleProfit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1"
@@ -456,6 +486,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.6"
+                android:textSize="@dimen/home_general_textsize"
                 android:textStyle="bold"
                 android:gravity="center_vertical|left"
                 android:text="ETH"/>
@@ -464,6 +495,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textStyle="bold"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:layout_weight="1"
                 android:text="0"/>
@@ -471,6 +503,7 @@
                 android:id="@+id/etherBalance"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1.2"
@@ -479,6 +512,7 @@
                 android:id="@+id/etherDeposit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1.2"
@@ -487,6 +521,7 @@
                 android:id="@+id/etherProfit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1"
@@ -509,6 +544,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|left"
+                android:textSize="@dimen/home_general_textsize"
                 android:layout_weight="0.6"
                 android:textStyle="bold"
                 android:text="BCH"/>
@@ -516,6 +552,7 @@
                 android:id="@+id/bitcoinCashUnit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1"
@@ -524,6 +561,7 @@
                 android:id="@+id/bitcoinCashBalance"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1.2"
@@ -532,6 +570,7 @@
                 android:id="@+id/bitcoinCashDeposit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1.2"
@@ -540,6 +579,7 @@
                 android:id="@+id/bitcoinCashProfit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
                 android:textStyle="bold"
                 android:layout_weight="1"
@@ -550,7 +590,6 @@
             android:layout_below="@id/balanceBitcoinCashLayout"
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="5dp"
             android:layout_height="100dp"
             android:weightSum="3">
@@ -566,6 +605,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
+                    android:textSize="@dimen/home_general_textsize"
                     android:textStyle="bold"
                     android:textColor="@color/colorAccent"
                     android:gravity="center_vertical|right"
@@ -584,6 +624,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
+                    android:textSize="@dimen/home_general_textsize"
                     android:textStyle="bold"
                     android:textColor="@color/colorAccent"
                     android:gravity="center_vertical|left"
@@ -598,6 +639,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
+                    android:textSize="@dimen/home_general_textsize"
                     android:textStyle="bold"
                     android:textColor="@color/colorAccent"
                     android:gravity="center_vertical|right"
@@ -616,6 +658,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
+                    android:textSize="@dimen/home_general_textsize"
                     android:textStyle="bold"
                     android:textColor="@color/colorAccent"
                     android:gravity="center_vertical|left"
@@ -630,6 +673,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
                     android:textStyle="bold"
+                    android:textSize="@dimen/home_general_textsize"
                     android:textColor="@color/colorAccent"
                     android:gravity="center_vertical|right"
                     android:text="Total Profit"/>
@@ -648,6 +692,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
                     android:textStyle="bold"
+                    android:textSize="@dimen/home_general_textsize"
                     android:textColor="@color/colorAccent"
                     android:gravity="center_vertical|left"
                     android:text="0"/>

@@ -69,11 +69,11 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         holder.dateText.setText(transaction.getDate());
         holder.coin_type.setText(transaction.getCoinType().toString());
         holder.tr_type.setText(transaction.getTransactionType().toString());
-        holder.volumeTxt.setText(transaction.getVolume());
-        holder.unitPriceTxt.setText(transaction.getPriceUnit());
-        holder.priceTxt.setText(transaction.getPrice());
-        holder.feesTxt.setText(transaction.getFees());
-        holder.totalTxt.setText(transaction.getTotal());
+        holder.volumeTxt.setText(getStringFromDouble4Point(Double.parseDouble(transaction.getVolume())));
+        holder.unitPriceTxt.setText(getStringFromDouble2Point(Double.parseDouble(transaction.getPriceUnit())));
+        holder.priceTxt.setText(getStringFromDouble2Point(Double.parseDouble(transaction.getPrice())));
+        holder.feesTxt.setText(getStringFromDouble2Point(Double.parseDouble(transaction.getFees())));
+        holder.totalTxt.setText(getStringFromDouble2Point(Double.parseDouble(transaction.getTotal())));
 
 
         holder.toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener(){
@@ -137,6 +137,17 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         String stringValue="0";
         try{
             stringValue = String.format("%.4f", value);
+        }
+        catch (Exception e){
+
+        }
+        return stringValue;
+    }
+
+    private String getStringFromDouble2Point(double value) {
+        String stringValue="0";
+        try{
+            stringValue = String.format("%.2f", value);
         }
         catch (Exception e){
 
