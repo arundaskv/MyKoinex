@@ -2,12 +2,15 @@ package wallet.mycoin.model;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
+
 /**
  * Created by Arun.Das on 22-12-2017.
  */
 @IgnoreExtraProperties
-public class Transaction {
+public class Transaction implements Serializable{
 
+    public String key;
     public TransactionType transactionType;
     public CoinType coinType;
     public String date;
@@ -79,5 +82,13 @@ public class Transaction {
 
     public void setTotal(String total) {
         this.total = total;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

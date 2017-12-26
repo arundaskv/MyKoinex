@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+import wallet.mycoin.api.DBServer;
 import wallet.mycoin.memory.KoinexMemory;
 import wallet.mycoin.model.CoinType;
 import wallet.mycoin.model.Transaction;
@@ -44,6 +45,7 @@ public class AddTransactionActivity extends AppCompatActivity {
     Button saveBtn;
     ImageButton dateImg;
     Spinner coinSpinner;
+    boolean isUpdate=false;
 
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
@@ -58,6 +60,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         initView();
+        restoreIfAny();
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserData(this).getUserid());
 
@@ -83,6 +86,47 @@ public class AddTransactionActivity extends AppCompatActivity {
 
 
     }
+
+    private void restoreIfAny() {
+        if(getIntent().hasExtra("transaction")){
+            isUpdate = true;
+            Transaction transaction = (Transaction) getIntent().getSerializableExtra("transaction");
+
+            if(transaction.getTransactionType()==TransactionType.SELL){
+                tranasctionType.setChecked(true);
+            }else{
+                tranasctionType.setChecked(false);
+            }
+            tranasctionType.setEnabled(false);
+
+            dateTxt.setText(transaction.getDate());
+            unitPriceEtx .setText(transaction.getPriceUnit());
+            volumeEtx .setText(transaction.getVolume());
+            priceTxt .setText(transaction.getPrice());
+            feesEtx .setText(transaction.getFees());
+            totalTxt .setText(transaction.getTotal());
+            coinSpinner.setSelection(getSelection(transaction.getCoinType()));
+        }
+    }
+
+    private int getSelection(CoinType coinType) {
+        switch (coinType){
+            case BTC:
+                return 0;
+            case LTC:
+                return 1;
+            case XRP:
+                return 2;
+            case ETH:
+                return 3;
+            case BCH:
+                return 4;
+                default:
+                    return 0;
+        }
+
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -313,8 +357,15 @@ public class AddTransactionActivity extends AppCompatActivity {
         transaction.setPrice(priceTxt.getText().toString());
         transaction.setFees(feesEtx.getText().toString());
         transaction.setTotal(totalTxt.getText().toString());
-        String key = mFirebaseDatabase.push().getKey();
-        mFirebaseDatabase.child(key).setValue(transaction);
+        if(!isUpdate){
+            String key = mFirebaseDatabase.push().getKey();
+            mFirebaseDatabase.child(key).setValue(transaction);
+        }else{
+            Transaction trans = (Transaction) getIntent().getSerializableExtra("transaction");
+            String key =trans.getKey() ;
+            mFirebaseDatabase.child(key).setValue(transaction);
+        }
+
         finish();
 
     }

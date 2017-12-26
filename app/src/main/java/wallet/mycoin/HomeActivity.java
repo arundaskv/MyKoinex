@@ -48,6 +48,7 @@ import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import wallet.mycoin.api.DBServer;
 import wallet.mycoin.api.ServiceGenerator;
 import wallet.mycoin.api.TickerClient;
 import wallet.mycoin.engin.CoinEngin;
@@ -141,7 +142,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     transactionList.clear();
                     for (DataSnapshot childSnapShot : dataSnapshot.getChildren()) {
+                        String key = childSnapShot.getKey();
                         Transaction transaction = childSnapShot.getValue(Transaction.class);
+                        transaction.setKey(key);
                         transactionList.add(transaction);
                     }
 

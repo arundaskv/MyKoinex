@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import wallet.mycoin.api.DBServer;
 import wallet.mycoin.memory.KoinexMemory;
 import wallet.mycoin.model.Transaction;
 
@@ -63,7 +64,9 @@ public class TransactionHistoryActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 transactionList.clear();
                 for (DataSnapshot childSnapShot : dataSnapshot.getChildren()) {
+                    String key = childSnapShot.getKey();
                     Transaction transaction = childSnapShot.getValue(Transaction.class);
+                    transaction.setKey(key);
                     transactionList.add(transaction);
                 }
                 adapter.notifyDataSetChanged();
