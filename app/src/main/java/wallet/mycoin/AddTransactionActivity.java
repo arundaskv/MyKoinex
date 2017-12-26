@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -51,8 +52,10 @@ public class AddTransactionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transaction);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         initView();
         mFirebaseInstance = FirebaseDatabase.getInstance();
@@ -80,7 +83,11 @@ public class AddTransactionActivity extends AppCompatActivity {
 
 
     }
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
     private void initView() {
         tranasctionType = findViewById(R.id.transaction_type);
         saveBtn = findViewById(R.id.transaction_save);
@@ -129,7 +136,6 @@ public class AddTransactionActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
-
 
 
         unitPriceEtx.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -309,7 +315,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         transaction.setTotal(totalTxt.getText().toString());
         String key = mFirebaseDatabase.push().getKey();
         mFirebaseDatabase.child(key).setValue(transaction);
-
+        finish();
 
     }
 
@@ -323,6 +329,14 @@ public class AddTransactionActivity extends AppCompatActivity {
     private CoinType getCoinType() {
         if(coinSpinner.getSelectedItem().toString().toString().equalsIgnoreCase("BTC")){
             return CoinType.BTC;
+        }else if(coinSpinner.getSelectedItem().toString().toString().equalsIgnoreCase("LTC")){
+            return CoinType.LTC;
+        }else if(coinSpinner.getSelectedItem().toString().toString().equalsIgnoreCase("XRP")){
+            return CoinType.XRP;
+        }else if(coinSpinner.getSelectedItem().toString().toString().equalsIgnoreCase("ETH")){
+            return CoinType.ETH;
+        }else if(coinSpinner.getSelectedItem().toString().toString().equalsIgnoreCase("BCH")){
+            return CoinType.BCH;
         }
         return null;
     }

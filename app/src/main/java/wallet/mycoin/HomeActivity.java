@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,16 +36,26 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import wallet.mycoin.api.ServiceGenerator;
 import wallet.mycoin.api.TickerClient;
+import wallet.mycoin.engin.CoinEngin;
 import wallet.mycoin.memory.KoinexMemory;
+import wallet.mycoin.model.CoinType;
 import wallet.mycoin.model.MyTicker;
 import wallet.mycoin.model.Ticker;
+import wallet.mycoin.model.Transaction;
 import wallet.mycoin.model.UnitDepo;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -102,6 +113,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     TextView emailId, usernameTxt;
     CircleImageView profileImage;
+    private ProgressBar progressBar;
+
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    private List<Transaction> transactionList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +130,43 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setupFab();
         initDrawerView();
         getTicker();
+        fetchData();
+    }
+
+    private void fetchData() {
+        transactionList = new ArrayList();
+        if(mFirebaseDatabase!=null){
+            mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    transactionList.clear();
+                    for (DataSnapshot childSnapShot : dataSnapshot.getChildren()) {
+                        Transaction transaction = childSnapShot.getValue(Transaction.class);
+                        transactionList.add(transaction);
+                    }
+
+                    if(transactionList.size()>0){
+                        CoinEngin.calculateUnitsBasedOnDBValues(HomeActivity.this,transactionList, new OnCalculation() {
+                            @Override
+                            public void onFiishedCalculation() {
+                                updateUnitDeposit();
+                                updateBalanceProfitInfo();
+                            }
+                        });
+                    }else{
+                        KoinexMemory.saveCoinUnitData(HomeActivity.this,null);
+                        updateUnitDeposit();
+                        updateBalanceProfitInfo();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+
+                }
+            });
+        }
+
     }
 
     private void initDrawerView() {
@@ -199,8 +252,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             userdata.setEmailId(email);
             userdata.setUserid(userId);
             userdata.setPhotoUrl(profileImageUrl);
-
-
+            mFirebaseDatabase = mFirebaseInstance.getReference(userId);
             KoinexMemory.saveUserData(this,userdata);
 
             if(emailId!=null && usernameTxt!=null &&profileImage!=null){
@@ -213,6 +265,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             MenuItem nav_account = menu.findItem(R.id.nav_account);
             nav_account.setTitle("Sign Out");
 
+            fetchData();
 
         } else {
             clearAllToDefaults();
@@ -291,8 +344,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,AddUnitsActivity.class);
-                startActivity(intent);
+                openAddTransactionPage();
             }
         });
     }
@@ -338,6 +390,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         totalBalance = findViewById(R.id.totalBalance);
         totalProfit = findViewById(R.id.totalProfit);
         percentText = findViewById(R.id.percentText);
+        /*progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);*/
+
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        if(KoinexMemory.getUserData(this)!=null){
+            mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserData(this).getUserid());
+        }
 
     }
 
@@ -358,12 +417,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    private void updateTimeStap() {
-        MyTicker myTicker = KoinexMemory.getMyTickerData(this);
-        if(myTicker!=null){
-            timestamp.setText(myTicker.getTimestamp());
-        }
-    }
 
     private void displayValues(Ticker ticker) {
         if(ticker !=null){
@@ -651,13 +704,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 alertForAccountActivity(false,"Are you sure you want to Sign out from Google Account. All your saved data will be lost");
             }
         } else if (id == R.id.nav_add_transaction) {
-            if(KoinexMemory.getUserData(this)!=null){
-
-                Intent intent = new Intent(HomeActivity.this,AddTransactionActivity.class);
-                startActivity(intent);
-            }else{
-                debugToast("Sign in with Google for Transactions");
-            }
+            openAddTransactionPage();
         } else if (id == R.id.nav_history_transaction) {
             if(KoinexMemory.getUserData(this)!=null){
 
@@ -672,6 +719,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         }
         return true;
+    }
+
+    private void openAddTransactionPage() {
+        if(KoinexMemory.getUserData(this)!=null){
+
+            Intent intent = new Intent(HomeActivity.this,AddTransactionActivity.class);
+            startActivity(intent);
+        }else{
+            debugToast("Sign in with Google for Transactions");
+        }
     }
 
     private void signOut() {
@@ -739,4 +796,5 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void signIntoFirebase() {
         signIn();
     }
+
 }

@@ -13,7 +13,7 @@ import android.widget.Toast;
 import wallet.mycoin.memory.KoinexMemory;
 import wallet.mycoin.model.UnitDepo;
 
-public class AddUnitsActivity extends AppCompatActivity {
+public class AddUnitsActivity extends AppCompatActivity{
 
     EditText bitcoin;
     EditText litecoin;
