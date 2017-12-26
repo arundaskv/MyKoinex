@@ -1,22 +1,28 @@
 package wallet.mycoin;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -33,6 +39,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import java.text.DateFormat;
 import java.util.Date;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import wallet.mycoin.api.ServiceGenerator;
 import wallet.mycoin.api.TickerClient;
 import wallet.mycoin.memory.KoinexMemory;
@@ -42,8 +49,9 @@ import wallet.mycoin.model.UnitDepo;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import wallet.mycoin.model.UserData;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView bitcoin;
     TextView bitcoinCash;
@@ -90,18 +98,37 @@ public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
     private FirebaseAuth mAuth;
-
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
+    TextView emailId, usernameTxt;
+    CircleImageView profileImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
         googleSignIn();
         initView();
         restore();
         setupToolbar();
         setupFab();
+        initDrawerView();
         getTicker();
+    }
+
+    private void initDrawerView() {
+        drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        usernameTxt = navigationView.getHeaderView(0).findViewById(R.id.nav_header_username);
+        emailId = navigationView.getHeaderView(0).findViewById(R.id.nav_header_email);
+        profileImage = navigationView.getHeaderView(0).findViewById(R.id.profile_image);
     }
 
     private void googleSignIn() {
@@ -111,7 +138,7 @@ public class HomeActivity extends AppCompatActivity {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
-        if(mAuth==null || mAuth.getCurrentUser()==null || KoinexMemory.getUserUniqueId(this)==null){
+        if(mAuth==null || mAuth.getCurrentUser()==null || KoinexMemory.getUserData(this)==null){
             signIn();
         }
     }
@@ -162,11 +189,83 @@ public class HomeActivity extends AppCompatActivity {
     }
     private void updateUI(FirebaseUser user) {
         if (user != null) {
+            String email = mAuth.getCurrentUser().getEmail();
+            String username = mAuth.getCurrentUser().getDisplayName();
+            String profileImageUrl = mAuth.getCurrentUser().getPhotoUrl().toString();
             String userId = mAuth.getCurrentUser().getEmail().split("@")[0];
-            KoinexMemory.saveUserUniqueId(this,userId);
-        } else {
 
+            UserData userdata = new UserData();
+            userdata.setUsername(username);
+            userdata.setEmailId(email);
+            userdata.setUserid(userId);
+            userdata.setPhotoUrl(profileImageUrl);
+
+
+            KoinexMemory.saveUserData(this,userdata);
+
+            if(emailId!=null && usernameTxt!=null &&profileImage!=null){
+                emailId.setText(email);
+                usernameTxt.setText(username);
+                Glide.with(this).load(profileImageUrl).placeholder(R.drawable.profile_placeholder_24dp).into(profileImage);
+            }
+
+            Menu menu = navigationView.getMenu();
+            MenuItem nav_account = menu.findItem(R.id.nav_account);
+            nav_account.setTitle("Sign Out");
+
+
+        } else {
+            clearAllToDefaults();
         }
+    }
+
+    private void clearAllToDefaults() {
+        KoinexMemory.saveUserData(HomeActivity.this,null);
+        KoinexMemory.saveCoinUnitData(HomeActivity.this,null);
+
+        bitcoinBalance.setText("0");
+        bitcoinUnit.setText("0");
+        bitcoinProfit.setText("0");
+        bitcoinDeposit.setText("0");
+
+        bitcoincashBalance.setText("0");
+        bitcoincashUnit.setText("0");
+        bitcoincashProfit.setText("0");
+        bitcoincashDeposit.setText("0");
+
+        rippleBalance.setText("0");
+        rippleUnit.setText("0");
+        rippleProfit.setText("0");
+        rippleDeposit.setText("0");
+
+        litecoinBalance.setText("0");
+        litecoinUnit.setText("0");
+        litecoinProfit.setText("0");
+        litecoinDeposit.setText("0");
+
+        ethereumBalance.setText("0");
+        ethereumUnit.setText("0");
+        ethereumProfit.setText("0");
+        ethereumDeposit.setText("0");
+
+        percentText.setText("0");
+
+        totalBalance.setText("0");
+
+        totalProfit.setText("0");
+
+        totalDeposit.setText("0");
+
+        adjustTextColorBasedOnProfit(bitcoinProfit,0);
+        adjustTextColorBasedOnProfit(bitcoincashProfit,0);
+        adjustTextColorBasedOnProfit(ethereumProfit,0);
+        adjustTextColorBasedOnProfit(litecoinProfit,0);
+        adjustTextColorBasedOnProfit(rippleProfit,0);
+        adjustTextColorBasedOnProfit(percentText,0);
+
+        usernameTxt.setText("Guest User");
+        emailId.setText("");
+        profileImage.setImageResource(R.drawable.profile_placeholder_24dp);
     }
 
     private void restore() {
@@ -188,22 +287,18 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setupFab() {
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab =  findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(KoinexMemory.getUserUniqueId(HomeActivity.this)!=null){
-                    Intent intent = new Intent(HomeActivity.this,TransactionHistoryActivity.class);
-                    startActivity(intent);
-                }else {
-                    signIn();
-                }
+                Intent intent = new Intent(HomeActivity.this,AddUnitsActivity.class);
+                startActivity(intent);
             }
         });
     }
 
     private void setupToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
@@ -344,6 +439,8 @@ public class HomeActivity extends AppCompatActivity {
                 adjustTextColorBasedOnProfit(ethereumProfit,ethProfit);
                 adjustTextColorBasedOnProfit(litecoinProfit,liteProfit);
                 adjustTextColorBasedOnProfit(rippleProfit,xrpProfit);
+                adjustTextColorBasedOnProfit(percentText,percent);
+                adjustTextColorBasedOnProfit(totalProfit,profit);
 
             }else{
                 bitcoinBalance.setText("0");
@@ -366,6 +463,8 @@ public class HomeActivity extends AppCompatActivity {
                 adjustTextColorBasedOnProfit(ethereumProfit,0);
                 adjustTextColorBasedOnProfit(litecoinProfit,0);
                 adjustTextColorBasedOnProfit(rippleProfit,0);
+                adjustTextColorBasedOnProfit(percentText,0);
+                totalProfit.setTextColor(getResources().getColor(R.color.colorAccent));
             }
         }else{
             bitcoinBalance.setText("0");
@@ -388,6 +487,8 @@ public class HomeActivity extends AppCompatActivity {
             adjustTextColorBasedOnProfit(ethereumProfit,0);
             adjustTextColorBasedOnProfit(litecoinProfit,0);
             adjustTextColorBasedOnProfit(rippleProfit,0);
+            adjustTextColorBasedOnProfit(percentText,0);
+            totalProfit.setTextColor(getResources().getColor(R.color.colorAccent));
         }
 
     }
@@ -454,11 +555,7 @@ public class HomeActivity extends AppCompatActivity {
         Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-        super.onBackPressed();
-    }
+
 
     @Override
     protected void onResume() {
@@ -505,12 +602,12 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.home_menu, menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.home_menu, menu);
         return true;
     }
 
-    @Override
+   @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // action with ID action_refresh was selected
@@ -539,5 +636,107 @@ public class HomeActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.nav_account) {
+            if(mAuth.getCurrentUser()== null){
+                signIn();
+            }else{
+                alertForAccountActivity(false,"Are you sure you want to Sign out from Google Account. All your saved data will be lost");
+            }
+        } else if (id == R.id.nav_add_transaction) {
+            if(KoinexMemory.getUserData(this)!=null){
+
+                Intent intent = new Intent(HomeActivity.this,AddTransactionActivity.class);
+                startActivity(intent);
+            }else{
+                debugToast("Sign in with Google for Transactions");
+            }
+        } else if (id == R.id.nav_history_transaction) {
+            if(KoinexMemory.getUserData(this)!=null){
+
+                Intent intent = new Intent(HomeActivity.this,TransactionHistoryActivity.class);
+                startActivity(intent);
+            }else{
+                debugToast("Sign in with Google for Transactions");
+            }
+
+        }
+        if(drawer!=null){
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        return true;
+    }
+
+    private void signOut() {
+        mAuth.signOut();
+        mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Menu menu = navigationView.getMenu();
+                        MenuItem nav_account = menu.findItem(R.id.nav_account);
+                        nav_account.setTitle("Sign In");
+
+                        updateUI(null);
+                        debugToast("Logged out from Google Account");
+                    }
+                });
+    }
+
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(drawer!=null){
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                finish();
+                super.onBackPressed();
+            }
+        }
+
+    }
+
+    private void alertForAccountActivity(final boolean isSignIn,String message) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Confirm Action");
+        alertDialogBuilder.setMessage(message);
+        alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                if(isSignIn){
+                    signIntoFirebase();
+                }else{
+                    signOutFromFirebase();
+                }
+
+            }
+        })
+         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id)  {
+
+                    }
+                });
+        alertDialogBuilder.create().show();
+
+    }
+
+    private void signOutFromFirebase() {
+        signOut();
+    }
+
+    private void signIntoFirebase() {
+        signIn();
     }
 }

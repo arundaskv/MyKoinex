@@ -54,7 +54,7 @@ public class TransactionHistoryActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         mFirebaseInstance = FirebaseDatabase.getInstance();
-        mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserUniqueId(this));
+        mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserData(this).getUserid());
 
         mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override

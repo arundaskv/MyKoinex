@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import wallet.mycoin.HomeActivity;
 import wallet.mycoin.model.MyTicker;
 import wallet.mycoin.model.UnitDepo;
+import wallet.mycoin.model.UserData;
 
 /**
  * Created by Arun.Das on 15-12-2017.
@@ -59,16 +60,26 @@ public class KoinexMemory {
         }
     }
 
-    public static String getUserUniqueId(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("mykoinex_memory",0);
-        String userid = sharedPreferences.getString("unique_id",null);
-        return userid;
-    }
-
-    public static void saveUserUniqueId(Context context, String userid){
+    public static void saveUserData(Context context, UserData userData){
         SharedPreferences sharedPreferences = context.getSharedPreferences("mykoinex_memory",0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("unique_id",userid);
+        String jsonInString = new Gson().toJson(userData);
+        editor.putString("user_data",jsonInString);
         editor.commit();
+    }
+
+    public static UserData getUserData(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("mykoinex_memory",0);
+        String jsonInString = sharedPreferences.getString("user_data",null);
+        try{
+            if(jsonInString!=null){
+                UserData userData = new Gson().fromJson(jsonInString, UserData.class);
+                return userData;
+            }else{
+                return null;
+            }
+        }catch (Exception e){
+            return null;
+        }
     }
 }

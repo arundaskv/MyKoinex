@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="wallet.mycoin.HomeActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_home_appbar">
 
     <RelativeLayout
         android:layout_marginTop="@dimen/home_content_top_margin"
@@ -189,7 +189,7 @@
                     android:layout_width="120dp"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold"
-                    android:textSize="32sp"
+                    android:textSize="28sp"
                     android:layout_height="match_parent"
                     android:text="-000.00"
                     android:gravity="center_vertical|right"/>

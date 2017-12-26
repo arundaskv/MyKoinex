@@ -5,11 +5,11 @@
     <dimen name="bottom_label_height">20dp</dimen>
     <dimen name="timestamp_fontsize">10sp</dimen>
     <dimen name="balance_label_font">28sp</dimen>
-    <dimen name="balance_label_margin_top">15dp</dimen>
-    <dimen name="balance_label_height">45dp</dimen>
+    <dimen name="balance_label_margin_top">7dp</dimen>
+    <dimen name="balance_label_height">42dp</dimen>
     <dimen name="balanceTitleLayout_height">25dp</dimen>
     <dimen name="balanceTitleLayout_margin">5dp</dimen>
-    <dimen name="balanceValueLayout_height">25dp</dimen>
+    <dimen name="balanceValueLayout_height">30dp</dimen>
     <dimen name="add_unit_layout_height">40dp</dimen>
     <dimen name="save_button_width">150dp</dimen>
     <dimen name="save_button_height">60dp</dimen>
