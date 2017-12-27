@@ -189,6 +189,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         usernameTxt = navigationView.getHeaderView(0).findViewById(R.id.nav_header_username);
         emailId = navigationView.getHeaderView(0).findViewById(R.id.nav_header_email);
         profileImage = navigationView.getHeaderView(0).findViewById(R.id.profile_image);
+
+
+        if(KoinexMemory.getUserData(this)!=null){
+            UserData userData = KoinexMemory.getUserData(this);
+            usernameTxt.setText(userData.getUsername());
+            emailId.setText(userData.getEmailId());
+            profileImage.setImageResource(R.drawable.profile_placeholder_24dp);
+        }
     }
 
     private void googleSignIn() {
@@ -215,8 +223,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        if(Connectivity.isConnected(this) && mAuth!=null){
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            updateUI(currentUser);
+        }
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -714,10 +724,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_account) {
-            if(mAuth.getCurrentUser()== null){
-                signIn();
-            }else{
-                alertForAccountActivity(false,"Are you sure you want to Sign out from Google Account. All your saved data will be lost");
+            if(Connectivity.isConnected(HomeActivity.this) && mAuth!=null){
+                if(mAuth.getCurrentUser()== null){
+                    signIn();
+                }else{
+                    alertForAccountActivity(false,"Are you sure you want to Sign out from Google Account. All your saved data will be lost");
+                }
             }
         } else if (id == R.id.nav_add_transaction) {
             openAddTransactionPage();

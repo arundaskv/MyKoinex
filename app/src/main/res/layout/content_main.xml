@@ -257,7 +257,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="@dimen/balance_label_font"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorAccent"
             android:layout_marginTop="@dimen/balance_label_margin_top"
             android:layout_height="@dimen/balance_label_height"
             android:text="YOUR BALANCE"/>
