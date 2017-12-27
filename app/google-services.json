@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "155840665607-vi3d6opdccmvsbn5f81u3ds595e4m29o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "wallet.mycoin",
+            "certificate_hash": "c60c11b4642e5d5b676bfd860f328f1955e7c373"
+          }
+        },
+        {
           "client_id": "155840665607-652gjb7r6455j3ncc2o6ni1ota2s1u4g.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
