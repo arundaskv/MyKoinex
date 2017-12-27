@@ -13,7 +13,7 @@
     <dimen name="add_unit_layout_height">40dp</dimen>
     <dimen name="save_button_width">150dp</dimen>
     <dimen name="save_button_height">60dp</dimen>
-    <dimen name="save_button_topMargin">50dp</dimen>
+    <dimen name="save_button_topMargin">15dp</dimen>
     <dimen name="home_content_top_margin">10dp</dimen>
     <dimen name="add_unit_left_margin">5dp</dimen>
     <dimen name="transaction_switch_width">200dp</dimen>

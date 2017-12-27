@@ -35,16 +35,17 @@ import wallet.mycoin.api.Connectivity;
 import wallet.mycoin.api.DBServer;
 import wallet.mycoin.memory.KoinexMemory;
 import wallet.mycoin.model.CoinType;
+import wallet.mycoin.model.CustomEditText;
 import wallet.mycoin.model.Transaction;
 import wallet.mycoin.model.TransactionType;
 
 public class AddTransactionActivity extends AppCompatActivity {
 
     Switch tranasctionType;
-    TextView dateTxt, totalTxt,priceTxt;
-    EditText volumeEtx, unitPriceEtx, feesEtx;
+    EditText dateTxt, totalTxt,priceTxt,feesEtx;
+    CustomEditText volumeEtx, unitPriceEtx ;
     Button saveBtn;
-    ImageButton dateImg;
+    //ImageButton dateImg;
     Spinner coinSpinner;
     boolean isUpdate=false;
 
@@ -142,7 +143,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         priceTxt = findViewById(R.id.priceEtx);
         feesEtx = findViewById(R.id.feesEtx);
         totalTxt = findViewById(R.id.totalTxt);
-        dateImg = findViewById(R.id.dateImg);
+        //dateImg = findViewById(R.id.dateImg);
         coinSpinner = findViewById(R.id.coinSpinner);
         tranasctionType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -158,7 +159,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         final Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         dateTxt.setText(""+calendar.get(Calendar.DAY_OF_MONTH)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.YEAR));
 
-        dateImg.setOnClickListener(new View.OnClickListener() {
+        dateTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -199,6 +200,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                     double unitPrice = 0;
                     double price =0;
                     double fees = 0;
+                    double total =0;
                     if (volumeEtx != null
                             && !TextUtils.isEmpty(volumeEtx.getText().toString())
                             && getDoubleFromString(volumeEtx.getText().toString()) != 0) {
@@ -210,6 +212,11 @@ public class AddTransactionActivity extends AppCompatActivity {
                             unitPrice = getDoubleFromString(unitPriceEtx.getText().toString());
 
                             price = volume * unitPrice;
+                            if(getTransactionType()==TransactionType.BUY) {
+                                fees = (price * 0.0025);
+                            }
+                            total = price+fees;
+
 
                         } else {
                             debugToast("Unit Price is mandatory");
@@ -219,15 +226,8 @@ public class AddTransactionActivity extends AppCompatActivity {
                         debugToast("Volume is mandatory");
                     }
                     priceTxt.setText("" + price);
-
-                    double totalPrice = 0;
-                    if(feesEtx!= null
-                            && !TextUtils.isEmpty(feesEtx.getText().toString())
-                            && getDoubleFromString(feesEtx.getText().toString()) != 0){
-                        fees = getDoubleFromString(feesEtx.getText().toString());
-                        totalPrice = fees + price;
-                        totalTxt.setText("" + totalPrice);
-                    }
+                    feesEtx.setText(""+fees);
+                    totalTxt.setText("" + total);
                 }
             }
         });
@@ -247,6 +247,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                     double unitPrice = 0;
                     double price =0;
                     double fees = 0;
+                    double total =0;
                     if (unitPriceEtx != null
                             && !TextUtils.isEmpty(unitPriceEtx.getText().toString())
                             && getDoubleFromString(unitPriceEtx.getText().toString()) != 0) {
@@ -258,29 +259,22 @@ public class AddTransactionActivity extends AppCompatActivity {
 
                             volume = getDoubleFromString(volumeEtx.getText().toString());
                             price = volume * unitPrice;
-
+                            if(getTransactionType()==TransactionType.BUY) {
+                                fees = (price * 0.0025);
+                            }
+                            total = price+fees;
                         } else {
                             debugToast("Volume is mandatory");
                         }
 
                     }
                     priceTxt.setText("" + price);
-
-                    double totalPrice = 0;
-                    if(feesEtx!= null
-                            && !TextUtils.isEmpty(feesEtx.getText().toString())
-                            && getDoubleFromString(feesEtx.getText().toString()) != 0){
-                        fees = getDoubleFromString(feesEtx.getText().toString());
-                        totalPrice = fees + price;
-                        totalTxt.setText("" + totalPrice);
-                    }
-
-
-
+                    feesEtx.setText(""+fees);
+                    totalTxt.setText("" + total);
                 }
             }
         });
-        feesEtx.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        /*feesEtx.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean isFocused) {
                 if(isFocused){
@@ -318,7 +312,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                     totalTxt.setText("" + totalPrice);
                 }
             }
-        });
+        });*/
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -406,16 +400,7 @@ public class AddTransactionActivity extends AppCompatActivity {
                 && getDoubleFromString(volumeEtx.getText().toString()) != 0) {
             if (!TextUtils.isEmpty(unitPriceEtx.getText().toString())
                     && getDoubleFromString(unitPriceEtx.getText().toString()) != 0) {
-                if (!TextUtils.isEmpty(feesEtx.getText().toString())) {
-                    if((getTransactionType()==TransactionType.BUY && getDoubleFromString(feesEtx.getText().toString()) != 0) ||
-                            getTransactionType()==TransactionType.SELL && getDoubleFromString(feesEtx.getText().toString()) >= 0){
-                        validation = true;
-                    }else {
-                        debugToast("Fees value is mandatory");
-                    }
-                } else {
-                    debugToast("Fees value is mandatory");
-                }
+                return true;
             }else{
                 debugToast("Unit Price value is mandatory");
             }
