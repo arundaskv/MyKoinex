@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
+import wallet.mycoin.api.Connectivity;
 import wallet.mycoin.memory.KoinexMemory;
 import wallet.mycoin.model.Transaction;
 
@@ -127,10 +128,11 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         }
     }
     private void delete(Transaction transaction) {
-        FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
-        DatabaseReference mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserData(mContext).getUserid());
-
-        mFirebaseDatabase.child(transaction.getKey()).removeValue();
+        if(Connectivity.isConnected(mContext)){
+            FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
+            DatabaseReference mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserData(mContext).getUserid());
+            mFirebaseDatabase.child(transaction.getKey()).removeValue();
+        }
     }
 
     private String getStringFromDouble4Point(double value) {

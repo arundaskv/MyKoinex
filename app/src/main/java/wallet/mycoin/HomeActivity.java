@@ -48,6 +48,7 @@ import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import wallet.mycoin.api.Connectivity;
 import wallet.mycoin.api.DBServer;
 import wallet.mycoin.api.ServiceGenerator;
 import wallet.mycoin.api.TickerClient;
@@ -135,39 +136,42 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void fetchData() {
-        transactionList = new ArrayList();
-        if(mFirebaseDatabase!=null){
-            mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    transactionList.clear();
-                    for (DataSnapshot childSnapShot : dataSnapshot.getChildren()) {
-                        String key = childSnapShot.getKey();
-                        Transaction transaction = childSnapShot.getValue(Transaction.class);
-                        transaction.setKey(key);
-                        transactionList.add(transaction);
+        if(Connectivity.isConnected(this)){
+            transactionList = new ArrayList();
+            if(mFirebaseDatabase!=null){
+                mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        transactionList.clear();
+                        for (DataSnapshot childSnapShot : dataSnapshot.getChildren()) {
+                            String key = childSnapShot.getKey();
+                            Transaction transaction = childSnapShot.getValue(Transaction.class);
+                            transaction.setKey(key);
+                            transactionList.add(transaction);
+                        }
+
+                        if(transactionList.size()>0){
+                            CoinEngin.calculateUnitsBasedOnDBValues(HomeActivity.this,transactionList, new OnCalculation() {
+                                @Override
+                                public void onFiishedCalculation() {
+                                    updateUnitDeposit();
+                                    updateBalanceProfitInfo();
+                                }
+                            });
+                        }else{
+                            KoinexMemory.saveCoinUnitData(HomeActivity.this,null);
+                            updateUnitDeposit();
+                            updateBalanceProfitInfo();
+                        }
                     }
 
-                    if(transactionList.size()>0){
-                        CoinEngin.calculateUnitsBasedOnDBValues(HomeActivity.this,transactionList, new OnCalculation() {
-                            @Override
-                            public void onFiishedCalculation() {
-                                updateUnitDeposit();
-                                updateBalanceProfitInfo();
-                            }
-                        });
-                    }else{
-                        KoinexMemory.saveCoinUnitData(HomeActivity.this,null);
-                        updateUnitDeposit();
-                        updateBalanceProfitInfo();
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+
                     }
-                }
+                });
+            }
 
-                @Override
-                public void onCancelled(DatabaseError error) {
-
-                }
-            });
         }
 
     }
@@ -188,20 +192,25 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void googleSignIn() {
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        mAuth = FirebaseAuth.getInstance();
-        if(mAuth==null || mAuth.getCurrentUser()==null || KoinexMemory.getUserData(this)==null){
-            signIn();
+        if(Connectivity.isConnected(this)){
+            gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .requestEmail()
+                    .build();
+            mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+            mAuth = FirebaseAuth.getInstance();
+            if(mAuth==null || mAuth.getCurrentUser()==null || KoinexMemory.getUserData(this)==null){
+                signIn();
+            }
         }
     }
 
     private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        if(Connectivity.isConnected(this)){
+            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+            startActivityForResult(signInIntent, RC_SIGN_IN);
+        }
+
     }
     @Override
     public void onStart() {
@@ -347,6 +356,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 openAddTransactionPage();
             }
         });
@@ -404,20 +414,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void getTicker() {
-        TickerClient tickerClient = ServiceGenerator.createService(TickerClient.class, "https://koinex.in/api");
-        tickerClient.getLatestTicker(new Callback<Ticker>() {
-            @Override
-            public void success(Ticker ticker, Response response) {
-                if(ticker!=null){
-                    displayValues(ticker);
+        if(Connectivity.isConnected(this)){
+            TickerClient tickerClient = ServiceGenerator.createService(TickerClient.class, "https://koinex.in/api");
+            tickerClient.getLatestTicker(new Callback<Ticker>() {
+                @Override
+                public void success(Ticker ticker, Response response) {
+                    if(ticker!=null){
+                        displayValues(ticker);
+                    }
                 }
-            }
-            @Override
-            public void failure(RetrofitError error) {
-                debugToast("Failed to get current values");
-                restore();
-            }
-        });
+                @Override
+                public void failure(RetrofitError error) {
+                    debugToast("Failed to get current values");
+                    restore();
+                }
+            });
+        }
+
     }
 
 
@@ -709,14 +722,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_add_transaction) {
             openAddTransactionPage();
         } else if (id == R.id.nav_history_transaction) {
-            if(KoinexMemory.getUserData(this)!=null){
-
-                Intent intent = new Intent(HomeActivity.this,TransactionHistoryActivity.class);
-                startActivity(intent);
-            }else{
-                debugToast("Sign in with Google for Transactions");
+            if(Connectivity.isConnected(this)){
+                if(KoinexMemory.getUserData(this)!=null){
+                    Intent intent = new Intent(HomeActivity.this,TransactionHistoryActivity.class);
+                    startActivity(intent);
+                }else{
+                    debugToast("Sign in with Google for Transactions");
+                }
             }
-
         }
         if(drawer!=null){
             drawer.closeDrawer(GravityCompat.START);
@@ -725,12 +738,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void openAddTransactionPage() {
-        if(KoinexMemory.getUserData(this)!=null){
-
-            Intent intent = new Intent(HomeActivity.this,AddTransactionActivity.class);
-            startActivity(intent);
-        }else{
-            debugToast("Sign in with Google for Transactions");
+        if(Connectivity.isConnected(this)){
+            if(KoinexMemory.getUserData(this)!=null){
+                Intent intent = new Intent(HomeActivity.this,AddTransactionActivity.class);
+                startActivity(intent);
+            }else{
+                debugToast("Sign in with Google for Transactions");
+            }
         }
     }
 
@@ -793,11 +807,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void signOutFromFirebase() {
-        signOut();
+        if(Connectivity.isConnected(this)){
+            signOut();
+        }
+
     }
 
     private void signIntoFirebase() {
-        signIn();
+            signIn();
     }
 
 }

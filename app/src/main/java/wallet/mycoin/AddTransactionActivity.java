@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+import wallet.mycoin.api.Connectivity;
 import wallet.mycoin.api.DBServer;
 import wallet.mycoin.memory.KoinexMemory;
 import wallet.mycoin.model.CoinType;
@@ -337,7 +338,10 @@ public class AddTransactionActivity extends AppCompatActivity {
         alertDialogBuilder.setMessage("Are you sure with the values ?");
         alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                saveAllData();
+                if(Connectivity.isConnected(AddTransactionActivity.this)){
+                    saveAllData();
+                }
+
             }
 
         })
