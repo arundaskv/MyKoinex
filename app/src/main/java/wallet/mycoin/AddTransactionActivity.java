@@ -298,12 +298,14 @@ public class AddTransactionActivity extends AppCompatActivity {
 
                         price = getDoubleFromString(priceTxt.getText().toString());
 
-                        if (!TextUtils.isEmpty(feesEtx.getText().toString())
-                                && getDoubleFromString(feesEtx.getText().toString()) != 0) {
-
-                            fees = getDoubleFromString(feesEtx.getText().toString());
-                            totalPrice = fees + price;
-
+                        if (!TextUtils.isEmpty(feesEtx.getText().toString())) {
+                            if((getTransactionType()==TransactionType.BUY && getDoubleFromString(feesEtx.getText().toString()) != 0) ||
+                                    getTransactionType()==TransactionType.SELL && getDoubleFromString(feesEtx.getText().toString()) >= 0){
+                                fees = getDoubleFromString(feesEtx.getText().toString());
+                                totalPrice = fees + price;
+                            }else {
+                                debugToast("Fees value is mandatory");
+                            }
                         } else {
                             debugToast("Fees value is mandatory");
                         }
@@ -394,7 +396,28 @@ public class AddTransactionActivity extends AppCompatActivity {
 
 
     private boolean validationSuccess() {
-        return true;
+        boolean validation = false;
+        if (!TextUtils.isEmpty(volumeEtx.getText().toString())
+                && getDoubleFromString(volumeEtx.getText().toString()) != 0) {
+            if (!TextUtils.isEmpty(unitPriceEtx.getText().toString())
+                    && getDoubleFromString(unitPriceEtx.getText().toString()) != 0) {
+                if (!TextUtils.isEmpty(feesEtx.getText().toString())) {
+                    if((getTransactionType()==TransactionType.BUY && getDoubleFromString(feesEtx.getText().toString()) != 0) ||
+                            getTransactionType()==TransactionType.SELL && getDoubleFromString(feesEtx.getText().toString()) >= 0){
+                        validation = true;
+                    }else {
+                        debugToast("Fees value is mandatory");
+                    }
+                } else {
+                    debugToast("Fees value is mandatory");
+                }
+            }else{
+                debugToast("Unit Price value is mandatory");
+            }
+        }else{
+            debugToast("Unit value is mandatory");
+        }
+        return validation;
     }
 
     private void debugToast(String message){
