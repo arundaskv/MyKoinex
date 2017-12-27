@@ -29,46 +29,81 @@
                 android:background="#FFFFFF"
                 android:layout_alignParentTop="true"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
-
             <TextView
-                android:id="@+id/dateText"
-                android:layout_width="100dp"
+                android:id="@+id/dateLbl"
+                android:layout_width="50dp"
                 android:layout_height="@dimen/card_label_height"
                 android:textSize="@dimen/card_label_font"
+                android:textColor="@color/black_light"
                 android:layout_alignParentTop="true"
                 android:gravity="center_vertical"
-                android:text=""
-                android:textStyle="bold" />
-
+                android:text="Date :"
+                android:textStyle="normal" />
             <TextView
-                android:id="@+id/coin_type"
-                android:layout_width="100dp"
+                android:id="@+id/dateText"
+                android:layout_width="75dp"
                 android:layout_height="@dimen/card_label_height"
                 android:textSize="@dimen/card_label_font"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
+                android:textColor="@color/black_dark"
+                android:layout_toRightOf="@+id/dateLbl"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical"
+                android:text="5-12-2017"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/coin_typeLbl"
+                android:layout_width="50dp"
+                android:layout_height="@dimen/card_label_height"
+                android:textSize="@dimen/card_label_font"
+                android:textColor="@color/black_light"
+                android:textStyle="normal"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/dateText"
                 android:layout_toRightOf="@+id/dateText"
                 android:gravity="center_vertical"
-                android:text="" />
+                android:text="Coin :" />
             <TextView
-                android:id="@+id/tr_type"
-                android:layout_width="75dp"
+                android:id="@+id/coin_type"
+                android:layout_width="50dp"
+                android:layout_height="@dimen/card_label_height"
+                android:textSize="@dimen/card_label_font"
+                android:textColor="@color/black_dark"
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/coin_typeLbl"
+                android:layout_toRightOf="@+id/coin_typeLbl"
+                android:gravity="center_vertical"
+                android:text="BTC" />
+            <TextView
+                android:id="@+id/tr_typeLbl"
+                android:layout_width="50dp"
                 android:layout_height="@dimen/card_label_height"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/card_label_font"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/coin_type"
                 android:layout_toEndOf="@+id/coin_type"
-                android:textColor="@color/colorPrimary"
-                android:text=""/>
+                android:textColor="@color/black_light"
+                android:text="Type"/>
+            <TextView
+                android:id="@+id/tr_type"
+                android:layout_width="75dp"
+                android:layout_height="@dimen/card_label_height"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/card_label_font"
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/tr_typeLbl"
+                android:layout_toEndOf="@+id/tr_typeLbl"
+                android:textColor="@color/black_dark"
+                android:text="BUY"/>
             <TextView
                 android:id="@+id/volumeLbl"
                 android:layout_width="65dp"
                 android:layout_height="@dimen/card_label_height"
                 android:textSize="@dimen/card_label_font"
                 android:gravity="center_vertical"
+                android:textColor="@color/black_light"
                 android:layout_below="@+id/dateText"
                 android:text="Volume :"/>
             <TextView
@@ -80,7 +115,7 @@
                 android:layout_toEndOf="@+id/volumeLbl"
                 android:textStyle="bold"
                 android:textSize="@dimen/card_label_font"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/black_dark"
                 android:layout_below="@+id/dateText"
                 android:text=""/>
             <TextView
@@ -89,7 +124,9 @@
                 android:layout_height="@dimen/card_label_height"
                 android:textSize="@dimen/card_label_font"
                 android:gravity="center_vertical"
+                android:textStyle="normal"
                 android:layout_below="@+id/coin_type"
+                android:textColor="@color/black_light"
                 android:layout_toRightOf="@+id/volumeTxt"
                 android:layout_toEndOf="@+id/volumeTxt"
                 android:text="Unit Price :"/>
@@ -102,7 +139,7 @@
                 android:layout_toEndOf="@+id/priceUnitLbl"
                 android:textStyle="bold"
                 android:textSize="@dimen/card_label_font"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/black_dark"
                 android:layout_below="@+id/coin_type"
                 android:text=""/>
 
@@ -111,7 +148,9 @@
                 android:layout_width="65dp"
                 android:layout_height="@dimen/card_label_height"
                 android:textSize="@dimen/card_label_font"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical"
+                android:textStyle="normal"
                 android:layout_below="@+id/volumeLbl"
                 android:text="Fees :"/>
             <TextView
@@ -124,7 +163,7 @@
                 android:layout_below="@+id/volumeLbl"
                 android:textStyle="bold"
                 android:textSize="@dimen/card_label_font"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/black_dark"
                 android:text=""/>
 
             <TextView
@@ -132,6 +171,8 @@
                 android:layout_width="75dp"
                 android:layout_height="@dimen/card_label_height"
                 android:textSize="@dimen/card_label_font"
+                android:textStyle="normal"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical"
                 android:layout_below="@+id/volumeLbl"
                 android:layout_toRightOf="@+id/feesTxt"
@@ -147,7 +188,7 @@
                 android:layout_below="@+id/volumeLbl"
                 android:textStyle="bold"
                 android:textSize="@dimen/card_label_font"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/black_dark"
                 android:text=""/>
 
 
@@ -156,6 +197,7 @@
                 android:layout_width="75dp"
                 android:layout_height="@dimen/card_label_height"
                 android:textSize="@dimen/card_label_font"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical"
                 android:layout_below="@+id/priceLbl"
                 android:text="Total :"/>
@@ -168,7 +210,7 @@
                 android:layout_toEndOf="@+id/totalLbl"
                 android:textStyle="bold"
                 android:textSize="@dimen/card_label_font"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/profit_green"
                 android:layout_below="@+id/priceLbl"
                 android:text=""/>
         </RelativeLayout>

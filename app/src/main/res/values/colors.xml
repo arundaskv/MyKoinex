@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="nav_header_center">#101F78</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#00B233</color>
+    <color name="colorPrimary">#42a5f5</color>
+    <color name="nav_header_center">#42a5f5</color>
+    <color name="colorPrimaryDark">#0077c2</color>
+    <color name="colorAccent">#009faf</color>
     <color name="lightGray">#e6e6e6</color>
-    <color name="nav_header_start">#07114D</color>
-    <color name="nav_header_end">#3F51B5</color>
+    <color name="nav_header_start">#009faf</color>
+    <color name="nav_header_end">#4dd0e1</color>
+    <color name="black_dark">#1f1f1f</color>
+    <color name="black_light">#646464</color>
+    <color name="profit_green">#2db300</color>
 </resources>

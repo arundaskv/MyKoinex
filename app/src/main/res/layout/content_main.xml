@@ -42,7 +42,7 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/home_general_textsize"
                         android:gravity="center|left"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/black_dark"
                         android:layout_height="wrap_content"
                         android:text="Bitcoin "/>
                     <TextView
@@ -51,13 +51,13 @@
                         android:gravity="center"
                         android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
-                        android:text=" : "/>
+                        android:text=" "/>
                     <TextView
                         android:id="@+id/bitcoinValue"
                         android:layout_weight="1"
                         android:textSize="@dimen/home_general_textsize"
                         android:gravity="center|left"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/black_light"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="0"/>
@@ -74,7 +74,7 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/home_general_textsize"
                         android:gravity="center|left"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/black_dark"
                         android:layout_height="wrap_content"
                         android:text="Litecoin "/>
                     <TextView
@@ -83,14 +83,14 @@
                         android:gravity="center"
                         android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
-                        android:text=" : "/>
+                        android:text="  "/>
                     <TextView
                         android:id="@+id/liteValue"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:textSize="@dimen/home_general_textsize"
                         android:gravity="center|left"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/black_light"
                         android:layout_height="wrap_content"
                         android:text="0"/>
                 </LinearLayout>
@@ -106,7 +106,7 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/home_general_textsize"
                         android:gravity="center|left"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/black_dark"
                         android:layout_height="wrap_content"
                         android:text="Ripple "/>
                     <TextView
@@ -115,14 +115,14 @@
                         android:gravity="center"
                         android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
-                        android:text=" : "/>
+                        android:text="  "/>
                     <TextView
                         android:id="@+id/rippleValue"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:textSize="@dimen/home_general_textsize"
                         android:gravity="center|left"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/black_light"
                         android:layout_height="wrap_content"
                         android:text="0"/>
                 </LinearLayout>
@@ -138,7 +138,7 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/home_general_textsize"
                         android:gravity="center|left"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/black_dark"
                         android:layout_height="wrap_content"
                         android:text="Ethereum "/>
 
@@ -148,14 +148,14 @@
                         android:gravity="center"
                         android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
-                        android:text=" : "/>
+                        android:text="  "/>
                     <TextView
                         android:id="@+id/etherValue"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:textSize="@dimen/home_general_textsize"
                         android:gravity="center|left"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/black_light"
                         android:layout_height="wrap_content"
                         android:text="0"/>
                 </LinearLayout>
@@ -171,7 +171,7 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/home_general_textsize"
                         android:gravity="center|left"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/black_dark"
                         android:layout_height="wrap_content"
                         android:text="Bitcoin Cash "/>
 
@@ -181,14 +181,14 @@
                         android:gravity="center"
                         android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
-                        android:text=" : "/>
+                        android:text="  "/>
                     <TextView
                         android:id="@+id/bitcoinCashValue"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:textSize="@dimen/home_general_textsize"
                         android:gravity="center|left"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/black_light"
                         android:layout_height="wrap_content"
                         android:text="0"/>
                 </LinearLayout>
@@ -205,7 +205,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black_dark"
                     android:text="Your Profit is"
                     android:gravity="center"/>
                 <TextView
@@ -224,7 +224,7 @@
                     android:layout_below="@id/profitLabel"
                     android:layout_toRightOf="@id/percentText"
                     android:layout_width="30dp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black_light"
                     android:textStyle="bold"
                     android:textSize="28sp"
                     android:layout_height="60dp"
@@ -278,7 +278,7 @@
                 android:layout_weight="0.6"
                 android:textSize="@dimen/home_general_textsize"
                 android:gravity="center|left"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/black_dark"
                 android:textStyle="bold"
                 android:text="Coin"/>
             <TextView
@@ -288,7 +288,7 @@
                 android:textSize="@dimen/home_general_textsize"
                 android:gravity="center|left"
                 android:layout_weight="1"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/black_dark"
                 android:text="Units"/>
             <TextView
                 android:layout_width="0dp"
@@ -297,7 +297,7 @@
                 android:textSize="@dimen/home_general_textsize"
                 android:gravity="center|left"
                 android:layout_weight="1.2"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/black_dark"
                 android:text="Balance"/>
             <TextView
                 android:layout_width="0dp"
@@ -306,7 +306,7 @@
                 android:textSize="@dimen/home_general_textsize"
                 android:gravity="center|left"
                 android:layout_weight="1.2"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/black_dark"
                 android:text="Deposit"/>
             <TextView
                 android:layout_width="0dp"
@@ -315,7 +315,7 @@
                 android:textSize="@dimen/home_general_textsize"
                 android:gravity="center|left"
                 android:layout_weight="1"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/black_dark"
                 android:text="Profit"/>
         </LinearLayout>
         <LinearLayout
@@ -323,7 +323,6 @@
             android:layout_below="@id/balanceTitleLayout"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/balanceTitleLayout_margin"
             android:layout_marginLeft="@dimen/balanceTitleLayout_margin"
             android:layout_marginRight="@dimen/balanceTitleLayout_margin"
             android:background="@color/lightGray"
@@ -334,17 +333,20 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:padding="2dp"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
                 android:layout_weight="0.6"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:text="BTC"/>
             <TextView
                 android:id="@+id/bitcoinUnit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1"
                 android:text="0"/>
             <TextView
@@ -352,8 +354,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1.2"
                 android:text="0"/>
             <TextView
@@ -361,8 +364,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1.2"
                 android:text="0"/>
             <TextView
@@ -370,8 +374,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1"
                 android:text="0"/>
 
@@ -392,7 +397,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.6"
                 android:textSize="@dimen/home_general_textsize"
-                android:textStyle="bold"
+                android:textColor="@color/black_light"
+                android:padding="2dp"
+                android:textStyle="normal"
                 android:gravity="center_vertical|left"
                 android:text="LTC"/>
             <TextView
@@ -400,8 +407,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1"
                 android:text="0"/>
             <TextView
@@ -409,8 +417,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1.2"
                 android:text="0"/>
             <TextView
@@ -418,8 +427,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1.2"
                 android:text="0"/>
             <TextView
@@ -427,8 +437,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1"
                 android:text="0"/>
 
@@ -450,16 +461,19 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.6"
                 android:textSize="@dimen/home_general_textsize"
+                android:padding="2dp"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:text="XRP"/>
             <TextView
                 android:id="@+id/rippleUnit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1"
                 android:text="0"/>
             <TextView
@@ -467,8 +481,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1.2"
                 android:text="0"/>
             <TextView
@@ -476,8 +491,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1.2"
                 android:text="0"/>
 
@@ -486,8 +502,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1"
                 android:text="0"/>
 
@@ -508,15 +525,18 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.6"
                 android:textSize="@dimen/home_general_textsize"
-                android:textStyle="bold"
+                android:padding="2dp"
+                android:textColor="@color/black_light"
+                android:textStyle="normal"
                 android:gravity="center_vertical|left"
                 android:text="ETH"/>
             <TextView
                 android:id="@+id/etherUnit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
                 android:layout_weight="1"
                 android:text="0"/>
@@ -526,7 +546,8 @@
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textColor="@color/black_light"
+                android:textStyle="normal"
                 android:layout_weight="1.2"
                 android:text="0"/>
             <TextView
@@ -534,8 +555,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1.2"
                 android:text="0"/>
             <TextView
@@ -543,8 +565,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1"
                 android:text="0"/>
 
@@ -566,16 +589,19 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|left"
                 android:textSize="@dimen/home_general_textsize"
+                android:padding="2dp"
+                android:textColor="@color/black_light"
                 android:layout_weight="0.6"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:text="BCH"/>
             <TextView
                 android:id="@+id/bitcoinCashUnit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1"
                 android:text="0"/>
             <TextView
@@ -583,8 +609,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1.2"
                 android:text="0"/>
             <TextView
@@ -592,8 +619,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1.2"
                 android:text="0"/>
             <TextView
@@ -601,8 +629,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/home_general_textsize"
+                android:textColor="@color/black_light"
                 android:gravity="center_vertical|left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:layout_weight="1"
                 android:text="0"/>
         </LinearLayout>
@@ -627,8 +656,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
                     android:textSize="@dimen/home_general_textsize"
+                    android:padding="2dp"
                     android:textStyle="bold"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black_dark"
                     android:gravity="center_vertical|right"
                     android:text="Total Deposit"/>
 
@@ -637,9 +667,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.4"
                     android:textStyle="bold"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black_dark"
                     android:gravity="center"
-                    android:text=":"/>
+                    android:text=""/>
                 <TextView
                     android:id="@+id/totalDeposit"
                     android:layout_width="0dp"
@@ -647,7 +677,7 @@
                     android:layout_weight="1.3"
                     android:textSize="@dimen/home_general_textsize"
                     android:textStyle="bold"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black_dark"
                     android:gravity="center_vertical|left"
                     android:text="0"/>
 
@@ -662,7 +692,7 @@
                     android:layout_weight="1.3"
                     android:textSize="@dimen/home_general_textsize"
                     android:textStyle="bold"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black_dark"
                     android:gravity="center_vertical|right"
                     android:text="Total Balance"/>
 
@@ -671,9 +701,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.4"
                     android:textStyle="bold"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black_dark"
                     android:gravity="center"
-                    android:text=":"/>
+                    android:text=""/>
                 <TextView
                     android:id="@+id/totalBalance"
                     android:layout_width="0dp"
@@ -681,7 +711,7 @@
                     android:layout_weight="1.3"
                     android:textSize="@dimen/home_general_textsize"
                     android:textStyle="bold"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black_dark"
                     android:gravity="center_vertical|left"
                     android:text="0"/>
             </LinearLayout>
@@ -695,7 +725,7 @@
                     android:layout_weight="1.3"
                     android:textStyle="bold"
                     android:textSize="@dimen/home_general_textsize"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black_dark"
                     android:gravity="center_vertical|right"
                     android:text="Total Profit"/>
 
@@ -704,9 +734,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.4"
                     android:textStyle="bold"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black_dark"
                     android:gravity="center"
-                    android:text=":"/>
+                    android:text=""/>
                 <TextView
                     android:id="@+id/totalProfit"
                     android:layout_width="0dp"
@@ -714,7 +744,7 @@
                     android:layout_weight="1.3"
                     android:textStyle="bold"
                     android:textSize="@dimen/home_general_textsize"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black_dark"
                     android:gravity="center_vertical|left"
                     android:text="0"/>
             </LinearLayout>
