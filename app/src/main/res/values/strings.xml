@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">MyCoin</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="app_name">Pocket Koin</string>
     <string name="title_activity_add_transaction">New Transaction</string>
     <string-array name="context_view">
         <item>BTC</item>
@@ -10,7 +8,7 @@
         <item>ETH</item>
         <item>BCH</item>
     </string-array>
-    <string name="title_activity_transaction_history">TransactionHistoryActivity</string>
+    <string name="title_activity_transaction_history">Transaction History</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
