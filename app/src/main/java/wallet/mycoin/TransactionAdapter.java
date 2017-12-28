@@ -130,6 +130,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     private void delete(Transaction transaction) {
         if(Connectivity.isConnected(mContext)){
             FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
+            mFirebaseInstance.setPersistenceEnabled(true);
             DatabaseReference mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserData(mContext).getUserid());
             mFirebaseDatabase.child(transaction.getKey()).removeValue();
         }

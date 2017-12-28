@@ -294,6 +294,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             userdata.setUserid(userId);
             userdata.setPhotoUrl(profileImageUrl);
             mFirebaseDatabase = mFirebaseInstance.getReference(userId);
+            mFirebaseInstance.setPersistenceEnabled(true);
             KoinexMemory.saveUserData(this,userdata);
 
             if(emailId!=null && usernameTxt!=null &&profileImage!=null){

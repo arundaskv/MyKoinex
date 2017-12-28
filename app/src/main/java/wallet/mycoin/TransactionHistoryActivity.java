@@ -62,6 +62,7 @@ public class TransactionHistoryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseInstance.setPersistenceEnabled(true);
         mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserData(this).getUserid());
 
         mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
