@@ -24,6 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -120,19 +124,34 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
     private List<Transaction> transactionList;
+    private InterstitialAd mInterstitialAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         googleSignIn();
         initView();
+        initAndLoadAds();
         restore();
         setupToolbar();
         setupFab();
         initDrawerView();
         getTicker();
         fetchData();
+    }
+
+
+    private void initAndLoadAds() {
+        MobileAds.initialize(this,"ca-app-pub-8508877271081335~8623375539");
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+
+        });
     }
 
     private void fetchData() {
@@ -297,7 +316,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void clearAllToDefaults() {
         KoinexMemory.saveUserData(HomeActivity.this,null);
         KoinexMemory.saveCoinUnitData(HomeActivity.this,null);
-
+        KoinexMemory.saveHomePageOnResumeCount(this,0);
         bitcoinBalance.setText("0");
         bitcoinUnit.setText("0");
         bitcoinProfit.setText("0");
@@ -366,7 +385,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                showAdBasedOnCount(7);
                 openAddTransactionPage();
             }
         });
@@ -378,6 +397,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initView() {
+        mInterstitialAd = new InterstitialAd(this);
         bitcoin = findViewById(R.id.bitcoinValue);
         bitcoinCash = findViewById(R.id.bitcoinCashValue);
         ether = findViewById(R.id.etherValue);
@@ -435,7 +455,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }
                 @Override
                 public void failure(RetrofitError error) {
-                    debugToast("Failed to get current values");
                     restore();
                 }
             });
@@ -639,6 +658,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
+        showAdBasedOnCount(17);
         getTicker();
     }
 
@@ -708,6 +728,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     }
                     isRefreshEnabled = false;
                 }else{
+                    showAdBasedOnCount(0);
                     debugToast("Refresh Request Disabled for "+countdownSeconds+" Seconds");
                 }
                 break;
@@ -732,6 +753,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         } else if (id == R.id.nav_add_transaction) {
+            showAdBasedOnCount(21);
             openAddTransactionPage();
         } else if (id == R.id.nav_history_transaction) {
             if(Connectivity.isConnected(this)){
@@ -828,5 +850,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void signIntoFirebase() {
             signIn();
     }
+
+    private void showAdBasedOnCount(int threshold){
+        KoinexMemory.saveHomePageOnResumeCount(this);
+        int count = KoinexMemory.getHomePageOnResumeCount(this);
+        if(threshold == 0){
+            threshold = count;
+        }
+        if(count%threshold==0){
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            }
+        }
+    }
+
 
 }

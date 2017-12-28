@@ -82,4 +82,24 @@ public class KoinexMemory {
             return null;
         }
     }
+
+    public static void saveHomePageOnResumeCount(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("mykoinex_memory",0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        int count = getHomePageOnResumeCount(context);
+        count=count+1;
+        editor.putInt("HOME_PAGE_ONRESUME",count);
+        editor.commit();
+    }
+    public static void saveHomePageOnResumeCount(Context context,int value) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("mykoinex_memory",0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("HOME_PAGE_ONRESUME",value);
+        editor.commit();
+    }
+    public static int getHomePageOnResumeCount(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("mykoinex_memory", 0);
+        int count = sharedPreferences.getInt("HOME_PAGE_ONRESUME",0);
+        return count;
+    }
 }

@@ -17,6 +17,9 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +41,7 @@ public class TransactionHistoryActivity extends AppCompatActivity {
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
     private ProgressBar progressBar;
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,7 @@ public class TransactionHistoryActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
+        initAndshowAdView();
         transactionList = new ArrayList();
         adapter = new TransactionAdapter(TransactionHistoryActivity.this, transactionList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -83,6 +88,12 @@ public class TransactionHistoryActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void initAndshowAdView() {
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     private void debugToast(String message){
