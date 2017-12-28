@@ -78,12 +78,12 @@
             android:orientation="horizontal"
             android:layout_below="@+id/dateLayout">
 
-            <wallet.mycoin.model.CustomEditText
+            <EditText
                 android:id="@+id/volumeEtx"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center|left"
-                android:inputType="numberDecimal|numberSigned"
+                android:inputType="number|numberDecimal"
                 android:maxLines="1"
                 android:hint="Volume"
                 android:selectAllOnFocus="true"
@@ -95,7 +95,7 @@
             android:layout_height="@dimen/add_transaction_field_height"
             android:orientation="horizontal"
             android:layout_below="@+id/volumeLayout">
-            <wallet.mycoin.model.CustomEditText
+            <EditText
                 android:id="@+id/priceUnitEtx"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

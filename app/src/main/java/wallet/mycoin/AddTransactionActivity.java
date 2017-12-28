@@ -6,17 +6,16 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
-import android.view.KeyEvent;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -25,17 +24,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
 import wallet.mycoin.api.Connectivity;
-import wallet.mycoin.api.DBServer;
 import wallet.mycoin.memory.KoinexMemory;
 import wallet.mycoin.model.CoinType;
-import wallet.mycoin.model.CustomEditText;
 import wallet.mycoin.model.Transaction;
 import wallet.mycoin.model.TransactionType;
 
@@ -43,7 +38,7 @@ public class AddTransactionActivity extends AppCompatActivity {
 
     Switch tranasctionType;
     EditText dateTxt, totalTxt,priceTxt,feesEtx;
-    CustomEditText volumeEtx, unitPriceEtx ;
+    EditText volumeEtx, unitPriceEtx ;
     Button saveBtn;
     //ImageButton dateImg;
     Spinner coinSpinner;
@@ -185,17 +180,22 @@ public class AddTransactionActivity extends AppCompatActivity {
         });
 
 
-        unitPriceEtx.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        unitPriceEtx.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View view, boolean isFocused) {
-                if(isFocused){
-                    if(getDoubleFromString(unitPriceEtx.getText().toString())!=0){
-                        unitPriceEtx.setSelectAllOnFocus(false);
-                    }else{
-                        unitPriceEtx.setSelectAllOnFocus(true);
-                    }
-                }
-                if (!isFocused) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().equalsIgnoreCase("-")){
+                    editable.replace(0, editable.length(), "");
+                }else{
                     double volume = 0;
                     double unitPrice = 0;
                     double price =0;
@@ -232,17 +232,39 @@ public class AddTransactionActivity extends AppCompatActivity {
             }
         });
 
-        volumeEtx.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+
+
+        unitPriceEtx.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean isFocused) {
                 if(isFocused){
-                    if(getDoubleFromString(volumeEtx.getText().toString())!=0){
-                        volumeEtx.setSelectAllOnFocus(false);
+                    if(getDoubleFromString(unitPriceEtx.getText().toString())!=0){
+                        unitPriceEtx.setSelectAllOnFocus(false);
                     }else{
-                        volumeEtx.setSelectAllOnFocus(true);
+                        unitPriceEtx.setSelectAllOnFocus(true);
                     }
                 }
-                if(!isFocused){
+            }
+        });
+
+
+        volumeEtx.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().equalsIgnoreCase("-")){
+                    editable.replace(0, editable.length(), "");
+                }else{
                     double volume = 0;
                     double unitPrice = 0;
                     double price =0;
@@ -274,45 +296,20 @@ public class AddTransactionActivity extends AppCompatActivity {
                 }
             }
         });
-        /*feesEtx.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+
+        volumeEtx.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean isFocused) {
                 if(isFocused){
-                    if(getDoubleFromString(feesEtx.getText().toString())!=0){
-                        feesEtx.setSelectAllOnFocus(false);
+                    if(getDoubleFromString(volumeEtx.getText().toString())!=0){
+                        volumeEtx.setSelectAllOnFocus(false);
                     }else{
-                        feesEtx.setSelectAllOnFocus(true);
+                        volumeEtx.setSelectAllOnFocus(true);
                     }
-                }
-                if(!isFocused){
-                    double fees = 0;
-                    double price =0;
-                    double totalPrice = 0;
-                    if (priceTxt != null
-                            && !TextUtils.isEmpty(priceTxt.getText().toString())
-                            && getDoubleFromString(priceTxt.getText().toString()) != 0) {
-
-                        price = getDoubleFromString(priceTxt.getText().toString());
-
-                        if (!TextUtils.isEmpty(feesEtx.getText().toString())) {
-                            if((getTransactionType()==TransactionType.BUY && getDoubleFromString(feesEtx.getText().toString()) != 0) ||
-                                    getTransactionType()==TransactionType.SELL && getDoubleFromString(feesEtx.getText().toString()) >= 0){
-                                fees = getDoubleFromString(feesEtx.getText().toString());
-                                totalPrice = fees + price;
-                            }else {
-                                debugToast("Fees value is mandatory");
-                            }
-                        } else {
-                            debugToast("Fees value is mandatory");
-                        }
-
-                    }else {
-                        debugToast("Price value is mandatory");
-                    }
-                    totalTxt.setText("" + totalPrice);
                 }
             }
-        });*/
+        });
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
