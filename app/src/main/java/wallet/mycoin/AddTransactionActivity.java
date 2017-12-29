@@ -58,7 +58,6 @@ public class AddTransactionActivity extends AppCompatActivity {
         initView();
         restoreIfAny();
         mFirebaseInstance = FirebaseDatabase.getInstance();
-        mFirebaseInstance.setPersistenceEnabled(true);
         mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserData(this).getUserid());
 
         mFirebaseDatabase.addValueEventListener(new ValueEventListener() {

@@ -39,7 +39,7 @@ public class TransactionHistoryActivity extends AppCompatActivity {
     private List<Transaction> transactionList;
     private TransactionAdapter adapter;
     private DatabaseReference mFirebaseDatabase;
-    private FirebaseDatabase mFirebaseInstance;
+
     private ProgressBar progressBar;
     private AdView mAdView;
     @Override
@@ -61,8 +61,7 @@ public class TransactionHistoryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        mFirebaseInstance = FirebaseDatabase.getInstance();
-        mFirebaseInstance.setPersistenceEnabled(true);
+        FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserData(this).getUserid());
 
         mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
@@ -92,9 +91,14 @@ public class TransactionHistoryActivity extends AppCompatActivity {
     }
 
     private void initAndshowAdView() {
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        try{
+            mAdView = findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     private void debugToast(String message){

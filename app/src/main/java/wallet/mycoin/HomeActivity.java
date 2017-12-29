@@ -143,7 +143,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private void initAndLoadAds() {
         MobileAds.initialize(this,"ca-app-pub-8508877271081335~8623375539");
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId("ca-app-pub-8508877271081335/6535434098");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
@@ -294,7 +294,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             userdata.setUserid(userId);
             userdata.setPhotoUrl(profileImageUrl);
             mFirebaseDatabase = mFirebaseInstance.getReference(userId);
-            mFirebaseInstance.setPersistenceEnabled(true);
             KoinexMemory.saveUserData(this,userdata);
 
             if(emailId!=null && usernameTxt!=null &&profileImage!=null){
@@ -438,6 +437,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         progressBar.setVisibility(View.VISIBLE);*/
 
         mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseInstance.setPersistenceEnabled(true);
         if(KoinexMemory.getUserData(this)!=null){
             mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserData(this).getUserid());
         }
