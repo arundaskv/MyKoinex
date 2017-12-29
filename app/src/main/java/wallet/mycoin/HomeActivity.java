@@ -753,7 +753,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     alertForAccountActivity(false,"Are you sure you want to Sign out from Google Account. All your saved data will be lost");
                 }
             }
-        } else if (id == R.id.nav_add_transaction) {
+        }
+        else if(id==R.id.nav_share){
+            shareTextUrl();
+        }else if(id==R.id.nav_settings){
+            openSettings();
+        }
+        else if (id == R.id.nav_add_transaction) {
             showAdBasedOnCount(21);
             openAddTransactionPage();
         } else if (id == R.id.nav_history_transaction) {
@@ -772,6 +778,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    private void openSettings() {
+
+    }
+
+    private void shareTextUrl() {
+        Intent share = new Intent(android.content.Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+
+        // Add data to the intent, the receiving app will decide
+        // what to do with it.
+        share.putExtra(Intent.EXTRA_SUBJECT, "PocketKoin");
+        share.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=wallet.mycoin");
+
+        startActivity(Intent.createChooser(share, "Share PocketKoin"));
+    }
     private void openAddTransactionPage() {
         if(Connectivity.isConnected(this)){
             if(KoinexMemory.getUserData(this)!=null){
