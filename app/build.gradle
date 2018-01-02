@@ -1,12 +1,13 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.firebase.firebase-crash'
 android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "wallet.mycoin"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 4
-        versionName "0.4"
+        versionCode 5
+        versionName "0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -35,5 +36,6 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.google.firebase:firebase-ads:11.8.0'
+    compile 'com.google.firebase:firebase-crash:11.8.0'
 }
 apply plugin: 'com.google.gms.google-services'
