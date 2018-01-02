@@ -204,6 +204,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        selectHomeNavigationItem();
 
         usernameTxt = navigationView.getHeaderView(0).findViewById(R.id.nav_header_username);
         emailId = navigationView.getHeaderView(0).findViewById(R.id.nav_header_email);
@@ -660,7 +661,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         showAdBasedOnCount(17);
+        selectHomeNavigationItem();
         getTicker();
+    }
+
+    private void selectHomeNavigationItem() {
+        try{
+            navigationView.getMenu().getItem(0).setChecked(true);
+        }catch (Exception e){
+
+        }
+
     }
 
     private String getCurrentDateTime(){
