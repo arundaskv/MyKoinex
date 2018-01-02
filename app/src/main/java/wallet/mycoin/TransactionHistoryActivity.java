@@ -1,5 +1,6 @@
 package wallet.mycoin;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import wallet.mycoin.api.Connectivity;
 import wallet.mycoin.api.DBServer;
 import wallet.mycoin.memory.KoinexMemory;
 import wallet.mycoin.model.Transaction;
@@ -42,12 +44,15 @@ public class TransactionHistoryActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
     private AdView mAdView;
+
+    FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_history);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setupFab();
         recyclerView = findViewById(R.id.recycler_view);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -89,7 +94,25 @@ public class TransactionHistoryActivity extends AppCompatActivity {
 
 
     }
-
+    private void setupFab() {
+        fab =  findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openAddTransactionPage();
+            }
+        });
+    }
+    private void openAddTransactionPage() {
+        if(Connectivity.isConnected(this)){
+            if(KoinexMemory.getUserData(this)!=null){
+                Intent intent = new Intent(this,AddTransactionActivity.class);
+                startActivity(intent);
+            }else{
+                debugToast("Sign in with Google for Transactions");
+            }
+        }
+    }
     private void initAndshowAdView() {
         try{
             mAdView = findViewById(R.id.adView);
