@@ -31,5 +31,8 @@
     <dimen name="card_label_height">25dp</dimen>
     <dimen name="home_general_textsize">12sp</dimen>
     <dimen name="add_transaction_field_height">55dp</dimen>
+    <dimen name="home_pd_dimen">25dp</dimen>
+    <dimen name="home_pd_top_margin">32dp</dimen>
+    <dimen name="home_profit_label_height">30dp</dimen>
 
 </resources>

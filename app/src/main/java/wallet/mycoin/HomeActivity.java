@@ -50,6 +50,8 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import wallet.mycoin.api.Connectivity;
@@ -125,6 +127,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseDatabase mFirebaseInstance;
     private List<Transaction> transactionList;
     private InterstitialAd mInterstitialAd;
+    ProgressBar myProgressBar;
+    Timer timer ;
+    boolean isRunning = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,8 +141,46 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setupToolbar();
         setupFab();
         initDrawerView();
-        getTicker();
+        startTimer();
         fetchData();
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+       cancelTimer();
+    }
+
+    private void cancelTimer() {
+        if(timer !=null){
+            if(isRunning){
+                timer.cancel();
+                Log.e("Timer","Timer Cancelled");
+            }
+        }
+    }
+
+    private void startTimer() {
+        timer = new Timer();
+        Log.e("Timer","Timer will Start within 3 second");
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                isRunning = true;
+                Log.e("Timer","Timer Started");
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        myProgressBar.setVisibility(View.VISIBLE);
+                        timestamp.setText("Refreshing Values...");
+                        getTicker();
+                    }
+                });
+
+            }
+        }, 30000, 30000);
     }
 
 
@@ -398,6 +441,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initView() {
+        myProgressBar = findViewById(R.id.progressBar);
         mInterstitialAd = new InterstitialAd(this);
         bitcoin = findViewById(R.id.bitcoinValue);
         bitcoinCash = findViewById(R.id.bitcoinCashValue);
@@ -590,7 +634,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             adjustTextColorBasedOnProfit(percentText,0);
             totalProfit.setTextColor(getResources().getColor(R.color.colorAccent));
         }
-
+        myProgressBar.setVisibility(View.INVISIBLE);
     }
 
     private void adjustTextColorBasedOnProfit(TextView view, double value) {
@@ -662,7 +706,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         showAdBasedOnCount(17);
         selectHomeNavigationItem();
-        getTicker();
+        resumeTimer();
+    }
+
+    private void resumeTimer() {
+        if(timer !=null){
+            if(isRunning){
+                Log.e("Timer","Resumed");
+
+                startTimer();
+            }
+        }
+
     }
 
     private void selectHomeNavigationItem() {
