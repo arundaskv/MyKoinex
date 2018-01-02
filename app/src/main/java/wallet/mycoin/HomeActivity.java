@@ -482,8 +482,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         /*progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);*/
 
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         mFirebaseInstance = FirebaseDatabase.getInstance();
-        mFirebaseInstance.setPersistenceEnabled(true);
         if(KoinexMemory.getUserData(this)!=null){
             mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserData(this).getUserid());
         }
