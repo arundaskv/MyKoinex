@@ -52,7 +52,7 @@ public class SettingsActivitiy extends AppCompatActivity {
 
             @Override
             public void onFailure() {
-
+                Toast.makeText(SettingsActivitiy.this, "Read External Storage permission is required to import data from storage", Toast.LENGTH_SHORT).show();
             }
         };
     }
