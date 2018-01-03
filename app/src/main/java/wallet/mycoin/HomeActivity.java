@@ -18,7 +18,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +39,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,12 +54,10 @@ import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import wallet.mycoin.api.Connectivity;
-import wallet.mycoin.api.DBServer;
 import wallet.mycoin.api.ServiceGenerator;
 import wallet.mycoin.api.TickerClient;
 import wallet.mycoin.engin.CoinEngin;
 import wallet.mycoin.memory.KoinexMemory;
-import wallet.mycoin.model.CoinType;
 import wallet.mycoin.model.MyTicker;
 import wallet.mycoin.model.Ticker;
 import wallet.mycoin.model.Transaction;
@@ -122,7 +118,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     TextView emailId, usernameTxt;
     CircleImageView profileImage;
-    private ProgressBar progressBar;
 
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
@@ -479,10 +474,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         totalBalance = findViewById(R.id.totalBalance);
         totalProfit = findViewById(R.id.totalProfit);
         percentText = findViewById(R.id.percentText);
-        /*progressBar = findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);*/
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         mFirebaseInstance = FirebaseDatabase.getInstance();
         if(KoinexMemory.getUserData(this)!=null){
             mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserData(this).getUserid());
@@ -846,7 +838,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void openSettings() {
-
+        startActivity(new Intent(HomeActivity.this, SettingsActivitiy.class));
     }
 
     private void shareTextUrl() {
