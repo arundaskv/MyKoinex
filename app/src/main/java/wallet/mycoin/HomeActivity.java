@@ -209,6 +209,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         }
 
                         if(transactionList.size()>0){
+                            KoinexMemory.setTransactionSizeEmpty(HomeActivity.this,false);
                             CoinEngin.calculateUnitsBasedOnDBValues(HomeActivity.this,transactionList, new OnCalculation() {
                                 @Override
                                 public void onFiishedCalculation() {
@@ -217,6 +218,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                 }
                             });
                         }else{
+                            KoinexMemory.setTransactionSizeEmpty(HomeActivity.this,true);
                             KoinexMemory.saveCoinUnitData(HomeActivity.this,null);
                             updateUnitDeposit();
                             updateBalanceProfitInfo();
@@ -842,7 +844,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void openSettings() {
-        //startActivity(new Intent(HomeActivity.this, SettingsActivitiy.class));
+        startActivity(new Intent(HomeActivity.this, SettingsActivitiy.class));
     }
 
     private void shareTextUrl() {

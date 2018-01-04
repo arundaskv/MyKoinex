@@ -85,12 +85,25 @@ public class CoinEngin {
             }
         }
 
+        if(bitcoinUnit<0.0001){
+            bitcoinUnit = 0;
+        }if(litecoinUnit<0.0001){
+            litecoinUnit = 0;
+        }if(bitcoinCash<0.0001){
+            bitcoinCash = 0;
+        }if(etherUnit<0.0001){
+            etherUnit = 0;
+        }if(rippleUnit<0.0001){
+            rippleUnit = 0;
+        }
+
         unitDepo.setBitcoinUnit(bitcoinUnit);
         unitDepo.setBitcoinDeposit(bitcoinDp);
         unitDepo.setLitecoinUnit(litecoinUnit);
         unitDepo.setLitecoinDeposit(litecoinDp);
         unitDepo.setRippleUnit(rippleUnit);
         unitDepo.setRippleDeposit(rippleUnitDp);
+
         unitDepo.setEthereumUnit(etherUnit);
         unitDepo.setEthereumDeposit(etherDp);
         unitDepo.setBitcoincashUnit(bitcoinCash);

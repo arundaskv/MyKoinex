@@ -102,4 +102,16 @@ public class KoinexMemory {
         int count = sharedPreferences.getInt("HOME_PAGE_ONRESUME",0);
         return count;
     }
+
+    public static void setTransactionSizeEmpty(Context context,boolean value) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("mykoinex_memory",0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("transaction_empty",value);
+        editor.commit();
+    }
+    public static boolean isTransactionSizeEmpty(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("mykoinex_memory", 0);
+        boolean value = sharedPreferences.getBoolean("transaction_empty",false);
+        return value;
+    }
 }

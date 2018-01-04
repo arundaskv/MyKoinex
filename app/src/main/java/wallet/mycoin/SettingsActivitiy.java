@@ -70,6 +70,7 @@ public class SettingsActivitiy extends AppCompatActivity {
 
     private void importCSVHere(){
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("file/csv");
         startActivityForResult(intent, PICKFILE_REQUEST_CODE);
     }
@@ -78,7 +79,7 @@ public class SettingsActivitiy extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==PICKFILE_REQUEST_CODE && resultCode==RESULT_OK){
-            String Fpath = data.getDataString();
+            String Fpath = data.getData().getPath();
             if(Fpath.split("\\.")[1].equalsIgnoreCase("csv")){
                 new ImportCSVHandler().ReadCSVFromFile(SettingsActivitiy.this,Fpath);
             }else{
