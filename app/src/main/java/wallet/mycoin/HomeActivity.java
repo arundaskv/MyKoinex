@@ -145,7 +145,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onPause() {
         super.onPause();
-       cancelTimer();
+
     }
 
     private void cancelTimer() {
@@ -159,7 +159,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private void startTimer() {
         timer = new Timer();
-        Log.e("Timer","Timer will Start within 3 second");
+        Log.e("Timer","Timer will Start within 0 second");
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -176,7 +176,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 });
 
             }
-        }, 30000, 30000);
+        }, 0, 30000);
     }
 
 
@@ -256,6 +256,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             emailId.setText(userData.getEmailId());
             profileImage.setImageResource(R.drawable.profile_placeholder_24dp);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cancelTimer();
     }
 
     private void googleSignIn() {
@@ -699,14 +705,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         showAdBasedOnCount(17);
         selectHomeNavigationItem();
-        resumeTimer();
     }
 
     private void resumeTimer() {
         if(timer !=null){
             if(isRunning){
                 Log.e("Timer","Resumed");
-
                 startTimer();
             }
         }
@@ -838,7 +842,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void openSettings() {
-        startActivity(new Intent(HomeActivity.this, SettingsActivitiy.class));
+        //startActivity(new Intent(HomeActivity.this, SettingsActivitiy.class));
     }
 
     private void shareTextUrl() {
