@@ -35,9 +35,6 @@ public class Connectivity {
     public static boolean isConnected(Context context){
         NetworkInfo info = Connectivity.getNetworkInfo(context);
         boolean isConnected = (info != null && info.isConnected());
-        if(!isConnected){
-            Toast.makeText(context, "No Network Connectivity", Toast.LENGTH_SHORT).show();
-        }
         return isConnected;
     }
 

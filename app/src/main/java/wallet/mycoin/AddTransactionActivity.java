@@ -329,6 +329,8 @@ public class AddTransactionActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int id) {
                 if(Connectivity.isConnected(AddTransactionActivity.this)){
                     saveAllData();
+                }else{
+                    Toast.makeText(AddTransactionActivity.this, "No Network Connectivity", Toast.LENGTH_SHORT).show();
                 }
 
             }

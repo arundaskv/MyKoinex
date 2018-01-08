@@ -111,6 +111,8 @@ public class TransactionHistoryActivity extends AppCompatActivity {
             }else{
                 debugToast("Sign in with Google for Transactions");
             }
+        }else{
+            Toast.makeText(this, "No Network Connectivity", Toast.LENGTH_SHORT).show();
         }
     }
     private void initAndshowAdView() {

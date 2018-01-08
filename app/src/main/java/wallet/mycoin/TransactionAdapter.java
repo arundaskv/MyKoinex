@@ -132,6 +132,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
             DatabaseReference mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserData(mContext).getUserid());
             mFirebaseDatabase.child(transaction.getKey()).removeValue();
+        }else{
+            Toast.makeText(mContext, "No Network Connectivity", Toast.LENGTH_SHORT).show();
         }
     }
 

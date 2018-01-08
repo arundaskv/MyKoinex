@@ -277,6 +277,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             if(mAuth==null || mAuth.getCurrentUser()==null || KoinexMemory.getUserData(this)==null){
                 signIn();
             }
+        } else{
+            Toast.makeText(this, "No Network Connectivity", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -835,6 +837,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }else{
                     debugToast("Sign in with Google for Transactions");
                 }
+            }else{
+                Toast.makeText(this, "No Network Connectivity", Toast.LENGTH_SHORT).show();
             }
         }
         if(drawer!=null){
@@ -867,6 +871,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }else{
                 debugToast("Sign in with Google for Transactions");
             }
+        }else{
+            Toast.makeText(this, "No Network Connectivity", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -931,6 +937,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void signOutFromFirebase() {
         if(Connectivity.isConnected(this)){
             signOut();
+        }else{
+            Toast.makeText(this, "No Network Connectivity", Toast.LENGTH_SHORT).show();
         }
 
     }
