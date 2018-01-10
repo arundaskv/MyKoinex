@@ -343,7 +343,7 @@
             android:layout_width="match_parent"
             android:layout_marginLeft="@dimen/balanceTitleLayout_margin"
             android:layout_marginRight="@dimen/balanceTitleLayout_margin"
-            android:background="@color/lightGray"
+            android:background="@drawable/ripple_gray"
             android:weightSum="5"
             android:layout_height="@dimen/balanceValueLayout_height">
 
@@ -408,6 +408,7 @@
             android:layout_marginLeft="@dimen/balanceTitleLayout_margin"
             android:layout_marginRight="@dimen/balanceTitleLayout_margin"
             android:weightSum="5"
+            android:background="@drawable/ripple_white"
             android:layout_height="@dimen/balanceValueLayout_height">
 
             <TextView
@@ -470,7 +471,7 @@
             android:layout_marginTop="@dimen/balanceTitleLayout_margin"
             android:layout_marginLeft="@dimen/balanceTitleLayout_margin"
             android:layout_marginRight="@dimen/balanceTitleLayout_margin"
-            android:background="@color/lightGray"
+            android:background="@drawable/ripple_gray"
             android:weightSum="5"
             android:layout_height="@dimen/balanceValueLayout_height">
 
@@ -536,6 +537,7 @@
             android:layout_marginLeft="@dimen/balanceTitleLayout_margin"
             android:layout_marginRight="@dimen/balanceTitleLayout_margin"
             android:weightSum="5"
+            android:background="@drawable/ripple_white"
             android:layout_height="@dimen/balanceValueLayout_height">
 
             <TextView
@@ -597,7 +599,7 @@
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/balanceTitleLayout_margin"
             android:layout_marginLeft="@dimen/balanceTitleLayout_margin"
-            android:background="@color/lightGray"
+            android:background="@drawable/ripple_gray"
             android:layout_marginRight="@dimen/balanceTitleLayout_margin"
             android:weightSum="5"
             android:layout_height="@dimen/balanceValueLayout_height">

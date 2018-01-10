@@ -10,6 +10,7 @@ import java.util.List;
 import wallet.mycoin.OnCalculation;
 import wallet.mycoin.memory.KoinexMemory;
 import wallet.mycoin.model.CoinType;
+import wallet.mycoin.model.SummaryModel;
 import wallet.mycoin.model.Transaction;
 import wallet.mycoin.model.TransactionType;
 import wallet.mycoin.model.UnitDepo;
@@ -128,5 +129,44 @@ public class CoinEngin {
 
         }
         return value;
+    }
+
+    public static SummaryModel getSummaryFromTransactions(List<Transaction> transactionList) {
+        double unit = 0.0;
+        double avg_price = 0.0;
+        double total = 0.0;
+        int count = 0;
+        for(Transaction transaction : transactionList){
+            if(transaction.getTransactionType()==TransactionType.BUY){
+                unit = unit+getDoubleFromString(transaction.getVolume());
+                avg_price = avg_price+getDoubleFromString(transaction.getPriceUnit());
+                count = count+1;
+            }else{
+                unit = unit-getDoubleFromString(transaction.getVolume());
+            }
+        }
+        if(unit<0.0001){
+            unit = 0;
+        }
+
+        if(unit==0){
+            avg_price = 0;
+        }else{
+            if(avg_price!=0 && count!=0){
+                avg_price = avg_price/count;
+            }else{
+                avg_price = 0.0;
+            }
+        }
+
+
+        total = unit*avg_price;
+
+        SummaryModel summaryModel = new SummaryModel();
+        summaryModel.setTotalVolume(unit);
+        summaryModel.setUnitPrice(avg_price);
+        summaryModel.setTotalPrice(total);
+
+        return summaryModel;
     }
 }

@@ -15,7 +15,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
@@ -32,9 +34,12 @@ import java.util.List;
 
 import wallet.mycoin.api.Connectivity;
 import wallet.mycoin.api.DBServer;
+import wallet.mycoin.engin.CoinEngin;
 import wallet.mycoin.memory.KoinexMemory;
 import wallet.mycoin.model.CoinType;
+import wallet.mycoin.model.SummaryModel;
 import wallet.mycoin.model.Transaction;
+import wallet.mycoin.model.TransactionType;
 
 public class TransactionHistoryActivity extends AppCompatActivity {
 
@@ -48,6 +53,9 @@ public class TransactionHistoryActivity extends AppCompatActivity {
 
     FloatingActionButton fab;
     int filterId = 0;
+    LinearLayout history_summary_layout;
+
+    TextView history_total_units,history_avg_unit_price,history_total_price;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,21 +63,16 @@ public class TransactionHistoryActivity extends AppCompatActivity {
         if(getIntent().hasExtra("filter")){
             filterId = getIntent().getIntExtra("filter",0);
         }
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        setupFab();
-        recyclerView = findViewById(R.id.recycler_view);
-        progressBar = findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);
-        initAndshowAdView();
         transactionList = new ArrayList();
+        setUpToolbar();
+        setupFab();
+        initViews();
+        initAndshowAdView();
         adapter = new TransactionAdapter(TransactionHistoryActivity.this, transactionList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration( new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         FirebaseDatabase mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserData(this).getUserid());
@@ -97,6 +100,16 @@ public class TransactionHistoryActivity extends AppCompatActivity {
                     }
                 }
                 adapter.notifyDataSetChanged();
+
+                if(filterId != 0 && transactionList.size()>0){
+                    history_summary_layout.setVisibility(View.VISIBLE);
+                }else{
+                    history_summary_layout.setVisibility(View.GONE);
+                }
+
+                updateSummaryLayout();
+
+
                 progressBar.setVisibility(View.GONE);
                 if(transactionList.size()==0){
                     debugToast("No Transaction available");
@@ -110,6 +123,36 @@ public class TransactionHistoryActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void updateSummaryLayout() {
+        SummaryModel summaryModel = CoinEngin.getSummaryFromTransactions(transactionList);
+        history_total_units.setText(getStringFromDouble4Point(summaryModel.getTotalVolume()));
+        history_avg_unit_price.setText(getStringFromDouble(summaryModel.getUnitPrice()));
+        history_total_price.setText(getStringFromDouble(summaryModel.getTotalPrice()));
+
+    }
+
+    private void setUpToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    private void initViews(){
+        recyclerView = findViewById(R.id.recycler_view);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        history_summary_layout = findViewById(R.id.history_summary_layout);
+        history_total_price = findViewById(R.id.history_total_price);
+        history_total_units = findViewById(R.id.history_total_units);
+        history_avg_unit_price = findViewById(R.id.history_avg_unit_price);
+        if(filterId != 0 && transactionList.size()>0){
+            history_summary_layout.setVisibility(View.VISIBLE);
+        }else{
+            history_summary_layout.setVisibility(View.GONE);
+        }
     }
 
     private CoinType getCoinType(int filterId) {
@@ -169,5 +212,27 @@ public class TransactionHistoryActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    private String getStringFromDouble(double value) {
+        String stringValue="0";
+        try{
+            stringValue = String.format("%.2f", value);
+        }
+        catch (Exception e){
+
+        }
+        return stringValue;
+    }
+
+    private String getStringFromDouble4Point(double value) {
+        String stringValue="0";
+        try{
+            stringValue = String.format("%.4f", value);
+        }
+        catch (Exception e){
+
+        }
+        return stringValue;
     }
 }

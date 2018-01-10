@@ -10,8 +10,100 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ProgressBar
+
+        <LinearLayout
+            android:id="@+id/history_summary_layout"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:weightSum="2"
+            android:layout_margin="5dp"
             android:visibility="gone"
+            android:background="@color/colorAccent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="normal"
+                    android:textSize="@dimen/card_label_font"
+                    android:text="Available Volume"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="normal"
+                    android:textSize="@dimen/card_label_font"
+                    android:text="Avg. Unit Price"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="normal"
+                    android:textSize="@dimen/card_label_font"
+                    android:text="Avg. Price"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/history_total_units"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/card_label_font"
+                    android:text="50000"/>
+
+                <TextView
+                    android:id="@+id/history_avg_unit_price"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/card_label_font"
+                    android:text="1234567"/>
+
+                <TextView
+                    android:id="@+id/history_total_price"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/card_label_font"
+                    android:text="$12345678"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <ProgressBar
+            android:visibility="visible"
             android:id="@+id/progressBar"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
@@ -32,7 +124,7 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/history_summary_layout"
             android:clipToPadding="false"
             android:scrollbars="vertical" />
     </RelativeLayout>

@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -45,7 +47,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+import wallet.mycoin.anim.MyBounceInterpolator;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -135,6 +137,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     LinearLayout balanceBitcoinCashLayout;
 
 
+    Animation myAnim;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -510,6 +513,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         balanceRipplecoinLayout.setOnClickListener(this);
         balanceEtherLayout.setOnClickListener(this);
         balanceBitcoinCashLayout.setOnClickListener(this);
+
+        myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+        myAnim.setInterpolator(interpolator);
+
     }
 
 
@@ -522,6 +530,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 public void success(Ticker ticker, Response response) {
                     if(ticker!=null){
                         displayValues(ticker);
+
+                        if(percentText!=null){
+                            percentText.startAnimation(myAnim);
+                        }
                     }
                 }
                 @Override
