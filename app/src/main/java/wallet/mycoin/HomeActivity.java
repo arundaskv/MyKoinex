@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,7 +68,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import wallet.mycoin.model.UserData;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
     TextView bitcoin;
     TextView bitcoinCash;
@@ -126,6 +127,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     ProgressBar myProgressBar;
     Timer timer ;
     boolean isRunning = false;
+
+    LinearLayout balanceBitcoinLayout;
+    LinearLayout balanceLitecoinLayout;
+    LinearLayout balanceEtherLayout;
+    LinearLayout balanceRipplecoinLayout;
+    LinearLayout balanceBitcoinCashLayout;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -490,7 +499,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             mFirebaseDatabase = mFirebaseInstance.getReference(KoinexMemory.getUserData(this).getUserid());
         }
 
+        balanceBitcoinLayout = findViewById(R.id.balanceBitcoinLayout);
+        balanceLitecoinLayout = findViewById(R.id.balanceLitecoinLayout);
+        balanceRipplecoinLayout = findViewById(R.id.balanceRipplecoinLayout);
+        balanceEtherLayout = findViewById(R.id.balanceEtherLayout);
+        balanceBitcoinCashLayout = findViewById(R.id.balanceBitcoinCashLayout);
+
+        balanceBitcoinLayout.setOnClickListener(this);
+        balanceLitecoinLayout.setOnClickListener(this);
+        balanceRipplecoinLayout.setOnClickListener(this);
+        balanceEtherLayout.setOnClickListener(this);
+        balanceBitcoinCashLayout.setOnClickListener(this);
     }
+
+
 
     private void getTicker() {
         if(Connectivity.isConnected(this)){
@@ -961,4 +983,35 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    @Override
+    public void onClick(View view) {
+        if(transactionList.size()>0){
+            Intent intent = new Intent(HomeActivity.this,TransactionHistoryActivity.class);
+            int filterId = 0;
+            switch (view.getId()){
+                case R.id.balanceBitcoinLayout:
+                    filterId = 1;
+                    break;
+                case R.id.balanceLitecoinLayout:
+                    filterId = 2;
+                    break;
+                case R.id.balanceRipplecoinLayout:
+                    filterId = 3;
+                    break;
+                case R.id.balanceEtherLayout:
+                    filterId = 4;
+                    break;
+                case R.id.balanceBitcoinCashLayout:
+                    filterId = 5;
+                    break;
+
+                    default:
+                        filterId = 0;
+
+            }
+            intent.putExtra("filter",filterId);
+            startActivity(intent);
+        }
+
+    }
 }

@@ -33,6 +33,7 @@ import java.util.List;
 import wallet.mycoin.api.Connectivity;
 import wallet.mycoin.api.DBServer;
 import wallet.mycoin.memory.KoinexMemory;
+import wallet.mycoin.model.CoinType;
 import wallet.mycoin.model.Transaction;
 
 public class TransactionHistoryActivity extends AppCompatActivity {
@@ -46,10 +47,14 @@ public class TransactionHistoryActivity extends AppCompatActivity {
     private AdView mAdView;
 
     FloatingActionButton fab;
+    int filterId = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_history);
+        if(getIntent().hasExtra("filter")){
+            filterId = getIntent().getIntExtra("filter",0);
+        }
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setupFab();
@@ -74,10 +79,22 @@ public class TransactionHistoryActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 transactionList.clear();
                 for (DataSnapshot childSnapShot : dataSnapshot.getChildren()) {
-                    String key = childSnapShot.getKey();
-                    Transaction transaction = childSnapShot.getValue(Transaction.class);
-                    transaction.setKey(key);
-                    transactionList.add(transaction);
+                    if(filterId==0) {
+                        String key = childSnapShot.getKey();
+                        Transaction transaction = childSnapShot.getValue(Transaction.class);
+                        transaction.setKey(key);
+                        transactionList.add(transaction);
+                    }else{
+                        String key = childSnapShot.getKey();
+                        CoinType cointype = getCoinType(filterId);
+                        if(cointype!=null){
+                            Transaction transaction = childSnapShot.getValue(Transaction.class);
+                            if(transaction.getCoinType()== cointype){
+                                transaction.setKey(key);
+                                transactionList.add(transaction);
+                            }
+                        }
+                    }
                 }
                 adapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
@@ -94,6 +111,24 @@ public class TransactionHistoryActivity extends AppCompatActivity {
 
 
     }
+
+    private CoinType getCoinType(int filterId) {
+        switch (filterId){
+            case 1:
+                return CoinType.BTC;
+            case 2:
+                return CoinType.LTC;
+            case 3:
+                return CoinType.XRP;
+            case 4:
+                return CoinType.ETH;
+            case 5:
+                return CoinType.BCH;
+                default:return null;
+        }
+
+    }
+
     private void setupFab() {
         fab =  findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

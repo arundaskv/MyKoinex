@@ -400,7 +400,7 @@
 
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/balanceEtherLayout"
+            android:id="@+id/balanceLitecoinLayout"
             android:layout_below="@id/balanceBitcoinLayout"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -463,8 +463,8 @@
 
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/balanceLitecoinLayout"
-            android:layout_below="@id/balanceEtherLayout"
+            android:id="@+id/balanceRipplecoinLayout"
+            android:layout_below="@id/balanceLitecoinLayout"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/balanceTitleLayout_margin"
@@ -528,8 +528,8 @@
 
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/balanceRipplecoinLayout"
-            android:layout_below="@id/balanceLitecoinLayout"
+            android:id="@+id/balanceEtherLayout"
+            android:layout_below="@id/balanceRipplecoinLayout"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/balanceTitleLayout_margin"
@@ -592,7 +592,7 @@
         </LinearLayout>
         <LinearLayout
             android:id="@+id/balanceBitcoinCashLayout"
-            android:layout_below="@id/balanceRipplecoinLayout"
+            android:layout_below="@id/balanceEtherLayout"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/balanceTitleLayout_margin"
