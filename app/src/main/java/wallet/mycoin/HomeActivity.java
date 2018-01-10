@@ -998,6 +998,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onClick(View view) {
         if(transactionList.size()>0){
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            }
             Intent intent = new Intent(HomeActivity.this,TransactionHistoryActivity.class);
             int filterId = 0;
             switch (view.getId()){
